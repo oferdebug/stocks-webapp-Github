@@ -20,6 +20,12 @@ export const metadata: Metadata = {
     "A SaaS trading solution offering advanced analytics, market insights, and streamlined trade execution for data-driven investment decisions.",
 };
 
+/**
+ * Root layout component that provides the application's global HTML structure, theme classes, and header.
+ *
+ * @param children - The page or application content to render inside the layout
+ * @returns The top-level HTML element tree containing the header and the provided children
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
