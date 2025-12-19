@@ -8,10 +8,10 @@ const useTradingViewWidget= (scriptUrl: string | undefined, config: Record<strin
 
 
 
-    useEffect(
-        () => {
-        if(!containerRef.current)return;
-        if(containerRef.current.dataset.loaded)return;
+    useEffect(() => {
+        if (!containerRef.current) return;
+        if (!scriptUrl) return;
+        if (containerRef.current.dataset.loaded) return;
         containerRef.current.innerHTML=`<div class='tradingView-widget-container_widget style=' width:100%; height:${height}px;'>`
             const script = document.createElement("script");
             script.src = scriptUrl;

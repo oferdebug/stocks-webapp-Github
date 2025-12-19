@@ -8,20 +8,24 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {Button} from '@/components/ui/button';
+import {useRouter} from 'next/navigation';
 import {LogOut} from "lucide-react";
 import NavItems from "@/components/NavItems";
 
-const UserDropDown =() => {
+interface UserDropDownProps {
+    asChild?: boolean
+}
+
+const UserDropDown = ({asChild}: UserDropDownProps) => {
     const router = useRouter();
 
     const handleSignOut = () => {
         router.push('/sign-in');
     };
 
-    const user = { name: 'Ofer', email: 'tradeIQ@gmail.com' };
+    const user = {name: 'Ofer', email: 'tradeIQ@gmail.com'};
 
     return (
         <DropdownMenu>
@@ -31,7 +35,7 @@ const UserDropDown =() => {
                     className="flex items-center gap-3 text-gray-400 hover:text-yellow-500"
                 >
                     <Avatar className="h-8 w-8">
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src="https://github.com/shadcn.png"/>
                         <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
                             {user.name[0]}
                         </AvatarFallback>
@@ -46,27 +50,28 @@ const UserDropDown =() => {
 
             <DropdownMenuContent className={'text-gray-400'}>
                 <DropdownMenuLabel>
-                <div className={'flex relative items-center gap-3 py-3'}>
-                    <Avatar className="h-10 w-10">
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-                            {user.name[0]}
-                        </AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
+                    <div className={'flex relative items-center gap-3 py-3'}>
+                        <Avatar className="h-10 w-10">
+                            <AvatarImage src="https://github.com/shadcn.png"/>
+                            <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
+                                {user.name[0]}
+                            </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
                         <span className={'text-base font-medium text-gray-400'}>
                         {user.name}
                         </span>
-                        <span className={'text-sm text-gray-500'}>{user.email}</span>
+                            <span className={'text-sm text-gray-500'}>{user.email}</span>
+                        </div>
                     </div>
-                </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className={'hidden sm:block bg-gray-600'} />
+                <DropdownMenuSeparator className={'hidden sm:block bg-gray-600'}/>
                 <nav className={'sm:hidden'}>
-                <NavItems />
+                    <NavItems/>
                 </nav>
-                <DropdownMenuItem onClick={handleSignOut} className={'text-gray-200 text-md font-medium focus:text-yellow-500 transition-colors cursor-pointer '}>
-                    <LogOut className={'h-4 w-4 mr-2 hidden sm:block'} />
+                <DropdownMenuItem onClick={handleSignOut}
+                                  className={'text-gray-200 text-md font-medium focus:text-yellow-500 transition-colors cursor-pointer '}>
+                    <LogOut className={'h-4 w-4 mr-2 hidden sm:block'}/>
                     Log Out
                 </DropdownMenuItem>
             </DropdownMenuContent>
