@@ -1,0 +1,9 @@
+[33mcommit 51800d75b375768d2792a0acd3994fd7f889ad8c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauth-ui[m[33m, [m[1;31morigin/auth-ui[m[33m)[m
+Merge: 9171a76 64360ab
+Author: oferdebug <125661677+oferdebug@users.noreply.github.com>
+Date:   Fri Dec 19 12:08:46 2025 +0200
+
+    Merge pull request #7 from oferdebug/copilot/sub-pr-6
+    
+    [WIP] Update CodeRabbit configuration for automated reviews
+
