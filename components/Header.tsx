@@ -8,7 +8,7 @@ const Header = () => {
             <div className="container flex h-16 items-center justify-between">
                 <Link href="/">
                     <Image
-                        src="/assets/icons/tradeiq_logo.svg"
+                        src="/assets/icons/logo1-nexttrade-dark (1).svg"
                         alt="TradeIQ Logo"
                         width={200}
                         height={200}

@@ -1,0 +1,8 @@
+reviews:
+  auto_review:
+    enabled: true
+    branches:
+      - main
+      - auth-ui
+
+  review_status: true

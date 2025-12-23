@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator";
-import Stars from "@/components/ui/stars";
 
 function Layout({ children }: { children: ReactNode }) {
     return (
@@ -25,24 +24,30 @@ function Layout({ children }: { children: ReactNode }) {
                 </div>
             </section>
 
-            <section className="auth-right-section">
-                <div className='z-10 relative lg:mt-4 lg:mb-16'>
+            <section className="auth-right-section flex flex-col justify-center px-10">
+                <div className='z-10 relative lg:mt-4 lg:mb-8'>
                     <div className={'grid grid-cols-[minmax(0,1fr)_auto] items-end w-full'}>
-                    <TestimonialRotator intervalMs={7000} />
-                        
-
-                        </div>
+                        <TestimonialRotator intervalMs={7000} />
                     </div>
+                </div>
 
-                <section className="flex-1 relative">
-                    <Image
-                        src="/assets/icons/dashboard-preview.png"
-                        alt="Dashboard Preview"
-                        width={1440}
-                        height={1150}
-                        className="auth-dashboard-preview absolute top-0"
-                    />
-                </section>
+                {/* Dashboard Preview  */}
+                <div className="relative mt-10 flex justify-center w-full">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[50%] bg-emerald-500/10 blur-[100px] rounded-full" />
+                    <div className="relative dashboard-preview-container [perspective:2000px] w-full max-w-[850px]">
+                        <Image
+                            src="/assets/images/485_1x_shots_so.png"
+                            alt="NextTrade Dashboard Preview"
+                            width={1200}
+                            height={800}
+                            className="rounded-2xl border border-white/10 shadow-2xl
+                           transform-gpu transition-all duration-700 ease-out
+                           [rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]
+                           hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
+                            priority
+                        />
+                    </div>
+                </div>
             </section>
         </main>
     );
