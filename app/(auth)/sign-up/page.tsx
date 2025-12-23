@@ -79,8 +79,14 @@ const {
                 {/*    validation={{required:'Full Name Is Required',minLength:2}}*/}
                 {/*/>*/}
                 {/* County */}
-                <CountrySelectField />
-
+                <CountrySelectField
+                    name="country"
+                    label="Country"
+                    placeholder="Select your country"
+                    control={control} // This passes the react-hook-form control to the component
+                    error={errors.country}
+                    validation={{ required: 'Country is required' }}
+                />
                 <SelectField
                 name='invetmentGoals'
                 label={'Investment Goals'}
