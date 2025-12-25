@@ -2,10 +2,11 @@ import Image from "next/image";
 import NavItems from "@/components/NavItems";
 import UserDropDown from "@/components/UserDropDown";
 import Link from "next/link";
+
 const Header = () => {
     return (
-        <header className="sticky top-0 z-50 bg-black">
-            <div className="container flex h-16 items-center justify-between">
+        <header className="sticky top-0 z-50 bg-black border-b border-gray-800">
+            <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 flex h-16 items-center justify-between">
                 <Link href="/">
                     <Image
                         src="/assets/icons/logo1-nexttrade-dark (1).svg"
@@ -24,7 +25,7 @@ const Header = () => {
                 <UserDropDown asChild={false} />
             </div>
         </header>
-
     )
 }
-export default Header
+
+export default Header;
