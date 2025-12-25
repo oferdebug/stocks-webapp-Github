@@ -5,6 +5,14 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator";
 
+/**
+ * Renders the two-panel authentication layout used across auth pages.
+ *
+ * The left panel shows branding and the provided children content; the right panel shows rotating testimonials and a decorative dashboard preview.
+ *
+ * @param children - Content to render inside the left auth panel
+ * @returns A React element representing the auth page layout
+ */
 function Layout({ children }: { children: ReactNode }) {
     return (
         <main className="auth-layout">
