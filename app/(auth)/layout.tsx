@@ -8,7 +8,7 @@ import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator
 function Layout({ children }: { children: ReactNode }) {
     return (
         <main className="auth-layout">
-            <section className="auth-left-section scrollbar-hide-default">
+            <section className="auth-left-section scrollbar-hide-default scroll-pt-12">
                 <Link href="/" className="auth-logo">
                     <Image
                         src="/assets/icons/logo1-nexttrade-dark (1).svg"
