@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+import {cn} from "@/lib/utils";
 
 /**
  * Reusable InputField Component
@@ -20,7 +20,7 @@ const InputField = ({
                         disabled
                     }: FormInputProps) => {
     return (
-        <div className="space-y-2">
+        <div className="space-y-2" suppressHydrationWarning>
             <Label htmlFor={name} className="form-label">{label}</Label>
             <Input
                 type={type}
@@ -32,7 +32,7 @@ const InputField = ({
                     { 'border-red-500 focus-visible:ring-red-500': error }
                 )}
                 {...register(name, validation)}
-                suppressHydrationWarning={true}
+                suppressHydrationWarning
             />
             {error && <p className="text-sm text-red-500 mt-1 font-medium">{error.message}</p>}
         </div>

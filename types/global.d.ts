@@ -68,6 +68,7 @@ declare global {
     };
 
     type User = {
+        image: string;
         id: string;
         name: string;
         email: string;
