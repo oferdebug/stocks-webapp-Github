@@ -1,13 +1,17 @@
 'use client';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {Button} from "@/components/ui/button";
 import InputField from "@/components/forms/inputField";
 import SelectField from "@/components/forms/SelectField";
 import {INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS} from "@/lib/constants";
 import CountrySelectField from "@/components/forms/countrySelectField";
 import FooterLink from "@/components/forms/FooterLink";
+import { signUpWithEmail } from "@/lib/actions/auth.actions";
+import {useRouter} from "next/navigation";
+import {toast} from "sonner";
 
 function SignUp() {
+    const router=useRouter();
   {/* Initialize form state with validation rules and default values */}
   const {
     register,
@@ -30,20 +34,28 @@ function SignUp() {
   {/* Process form submission with error handling */}
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
+      const result = await signUpWithEmail(data);
+          
+          if (result && result.success) {
+            toast.success('Account created successfully!');
+            router.push('/');
+          } else {
+            toast.error(result?.message || 'Sign Up Failed');
+          }
+        } catch (e) {
+          console.error(e);
+          toast.error('An unexpected error occurred. Please try again.');
+        }
   };
 
   return (
-    <div className="relative overflow-hidden">
-      <h1 className="form-title">SignUp & Personalize Your Experience</h1>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* User credentials input section */}
-        <InputField
-          name="fullName"
+      <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-6"
+          suppressHydrationWarning
+      >
+          <InputField
+              name="fullName"
           label="Full Name"
           placeholder="Sarah Mitchell"
           register={register}
@@ -122,7 +134,6 @@ function SignUp() {
           href="/sign-in" 
         />
       </form>
-    </div>
   );
 }
 

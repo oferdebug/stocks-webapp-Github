@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { ReactNode } from "react";
-import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator";
+import type {ReactNode} from "react";
+import {TestimonialRotator} from "@/components/testimonials/TestimonialRotator";
+import {cn} from "@/lib/utils"; // Adjust the import path based on your project structure
 
 function Layout({ children }: { children: ReactNode }) {
     return (
@@ -40,10 +41,12 @@ function Layout({ children }: { children: ReactNode }) {
                             alt="NextTrade Dashboard Preview"
                             width={1200}
                             height={800}
-                            className="rounded-2xl border border-white/10 shadow-2xl
-                           transform-gpu transition-all duration-700 ease-out
-                           [rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]
-                           hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
+                            className={cn(
+                                "rounded-2xl border border-white/10 shadow-2xl",
+                                "transform-gpu transition-all duration-700 ease-out",
+                                "[rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]",
+                                "hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
+                            )}
                             priority
                         />
                     </div>
