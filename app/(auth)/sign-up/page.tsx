@@ -52,7 +52,7 @@ function SignUp() {
       <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6"
-          suppressHydrationWarning
+          // suppressHydrationWarning
       >
           <InputField
               name="fullName"

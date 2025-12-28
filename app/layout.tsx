@@ -28,22 +28,23 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         headers: await headers(),
     });
 
-    // 1. Handle redirect first
-    // if (!session?.user) {
-    //     redirect('/sign-in');
-    // }
-
-    // 2. TypeScript now knows session.user exists here
     const user = {
-        ...session.user,
-        image: session.user.image || null,
+        ...session?.user,
+        image: session?.user?.image || null,
     };
 
     return (
+        <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className="antialiased">
         <main className="min-h-screen text-gray-200">
             <Header user={user} />
-            <div className={"container py-10 home-wrapper"}>{children}</div>
+            <div className={"container py-10 home-wrapper"}>
+                {children}
+            </div>
+            <Toaster />
         </main>
+        </body>
+        </html>
     );
 };
 
