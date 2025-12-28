@@ -37,7 +37,7 @@ const UserDropDown = ({ user, asChild }: UserDropDownProps) => {
     const router = useRouter();
 
     const handleSignOut = () => {
-        {/* Logic for sign out should clear the session/cookies before redirecting */}
+        {/* Logic for sign-out should clear the session/cookies before redirecting */}
         router.push('/sign-in');
     };
 
@@ -48,17 +48,17 @@ const UserDropDown = ({ user, asChild }: UserDropDownProps) => {
             <DropdownMenuTrigger asChild>
                 <Button
                     variant="ghost"
-                    className="flex items-center gap-3 text-gray-400 hover:text-green-500 focus-visible:ring-0"
+                    className="flex items-center gap-3 text-'white'-400 hover:text-green-500 focus-visible:ring-green-0"
                 >
                     <Avatar className="h-8 w-8">
-                        {/* Senior Tip: Use user?.image if your auth provider supports it, otherwise fallback to default */}
+                        {/* Senior Tip: Use user?.image if your auth provider supports it, otherwise fall back to default */}
                         <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"} />
-                        <AvatarFallback className="bg-green-500 text-green-900 text-sm font-bold">
+                        <AvatarFallback className="bg-green-400 text-green-900 text-sm font-bold">
                             {userInitials}
                         </AvatarFallback>
                     </Avatar>
                     <div className="hidden md:flex flex-col items-start">
-                        <span className="text-base font-medium text-gray-400">
+                        <span className="text-base font-medium text-white-400 hover:text-green-500">
                             {user?.name || "Guest"}
                         </span>
                     </div>

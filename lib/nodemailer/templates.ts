@@ -1,5 +1,5 @@
 
-const LOGO_URL = "https://ik.imagekit.io/a6fkjou7d/logo.png?updatedAt=1756378431634";
+const LOGO_URL = "https://ik.imagekit.io/zqqzyfql1/logo1-nexttrade-dark%20(1).svg";
 const APP_NAME = "NextTrade";
 const DASHBOARD_URL = "https://next-trade-app.vercel.app/";
 

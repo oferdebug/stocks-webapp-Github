@@ -34,10 +34,10 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     // }
 
     // 2. TypeScript now knows session.user exists here
-    const user = {
+    const user = session?.user ? {
         ...session.user,
         image: session.user.image || null,
-    };
+    } : null;
 
     return (
         <main className="min-h-screen text-gray-200">
@@ -47,4 +47,27 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default Layout;
+export default async function RootLayout({
+                                             children,
+                                         }: Readonly<{
+    children: React.ReactNode;
+}>) {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    const user = session?.user ? {
+        ...session.user,
+        image: session.user.image || null
+    } : null;
+
+    return (
+        <html lang="en" className="dark" suppressHydrationWarning>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Header user={user} />
+        {children}
+        <Toaster />
+        </body>
+        </html>
+    );
+}

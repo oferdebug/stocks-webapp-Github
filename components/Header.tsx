@@ -9,7 +9,7 @@ interface HeaderProps {
         name: string;
         email: string;
         image?: string | null;
-        [key: string]: any; // Match the index signature in UserDropDown
+        [key: string]: unknown; // Match the index signature in UserDropDown
     } | null;
 }
 
@@ -21,7 +21,7 @@ const Header = ({ user }: HeaderProps) => {
                 <Link href="/">
                     <Image
                         src="/assets/icons/logo1-nexttrade-dark (1).svg"
-                        alt="TradeIQ Logo"
+                        alt="NextTrade Logo"
                         width={200}
                         height={200}
                         className="h-10 w-auto"
@@ -32,7 +32,7 @@ const Header = ({ user }: HeaderProps) => {
                 <nav className="hidden sm:block">
                     <NavItems />
                 </nav>
-                <UserDropDown asChild={false} user={session?.user} />
+                <UserDropDown asChild={false} user={user} />
             </div>
         </header>
     )

@@ -85,7 +85,7 @@
     --card-foreground: oklch(0.984 0.003 247.858);
     --popover: oklch(0.208 0.042 265.755);
     --popover-foreground: oklch(0.984 0.003 247.858);
-    --primary: oklch(0.929 0.013 255.508);
+    --primary: oklch(0.984 0.003 247.858);
     --primary-foreground: oklch(0.208 0.042 265.755);
     --secondary: oklch(0.279 0.041 260.031);
     --secondary-foreground: oklch(0.984 0.003 247.858);
@@ -124,8 +124,8 @@
 
     /* Vibrant Colors */
     --color-blue-600: #5862FF;
-    --color-yellow-400: #FDD458;
-    --color-yellow-500: #E8BA40;
+    --color-green-400: #66fd58;
+    --color-green-500: #6de840;
     --color-teal-400: #0FEDBE;
     --color-red-500: #FF495B;
     --color-orange-500: #FF8243;
@@ -228,11 +228,11 @@
     }
 
     .footer-link {
-        @apply text-gray-400 font-medium hover:text-yellow-400 hover:underline transition-colors;
+        @apply text-gray-400 font-medium hover:text-green-500 hover:underline transition-colors;
     }
 
     .search-text {
-        @apply cursor-pointer hover:text-yellow-500;
+        @apply cursor-pointer hover:text-green-500;
     }
 
     .search-btn {

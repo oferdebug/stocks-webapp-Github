@@ -14,7 +14,7 @@ const NavItems=()=>{
             {NAV_ITEMS.map(({href,label})=>(
                 <li key={href}>
                     <Link href={href} className={`transition-colors ${
-                        isActive(href) ? 'text-yellow-500' : 'text-white hover:text-yellow-500'
+                        isActive(href) ? 'text-green-500' : 'text-white hover:text-green-500'
                     }`}>
                     {label}
                 </Link>
