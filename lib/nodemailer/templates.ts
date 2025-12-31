@@ -1,5 +1,4 @@
-
-const LOGO_URL = "https://ik.imagekit.io/a6fkjou7d/logo.png?updatedAt=1756378431634";
+const LOGO_URL = "https://ik.imagekit.io/zqqzyfql1/logo1-nexttrade-dark.png";
 const APP_NAME = "NextTrade";
 const DASHBOARD_URL = "https://next-trade-app.vercel.app/";
 
@@ -22,12 +21,12 @@ export const NEWS_SUMMARY_EMAIL_TEMPLATE = `<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td style="padding: 0 40px 40px 40px;">
-                            <h1 style="color: #FDD458; margin: 0 0 20px 0;">Your Daily Market Update</h1>
+                            <h1 style="color: #34d399; margin: 0 0 20px 0;">Your Daily Market Update</h1>
                             <div style="color: #CCDADC;">
                                 {{newsContent}}
                             </div>
                             <br>
-                            <a href="${DASHBOARD_URL}" style="display: block; background: #FDD458; color: #000; padding: 16px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold;">Open Trading Dashboard</a>
+                            <a href="${DASHBOARD_URL}" style="display: block; background: #34d399; color: #000; padding: 16px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold;">Open Trading Dashboard</a>
                         </td>
                     </tr>
                 </table>
@@ -56,10 +55,10 @@ export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
                     </tr>
                     <tr>
                         <td style="padding: 40px;">
-                            <h1 style="color: #FDD458;">Welcome aboard {{name}}</h1>
+                            <h1 style="color: #34d399;">Welcome aboard {{name}}</h1>
                             <div style="color: #CCDADC;">{{intro}}</div>
                             <br>
-                            <a href="${DASHBOARD_URL}" style="display: block; background: #FDD458; color: #000; padding: 16px; text-align: center; border-radius: 8px; text-decoration: none;">Open Dashboard</a>
+                            <a href="${DASHBOARD_URL}" style="display: block; background: #34d399; color: #000; padding: 16px; text-align: center; border-radius: 8px; text-decoration: none;">Open Dashboard</a>
                         </td>
                     </tr>
                 </table>
