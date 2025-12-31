@@ -9,7 +9,7 @@ interface HeaderProps {
         name?: string;
         email?: string;
         image?: string | null;
-        [key: string]: any; // Match the index signature in UserDropDown
+        [key: string]: any;
     } | null;
 }
 
