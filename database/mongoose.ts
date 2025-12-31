@@ -25,9 +25,14 @@ export const connectToDatabase = async () => {
 
 
     if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI, {
+        const opts = {
             bufferCommands: false,
-        }).then((mongooseInstance) => {
+            serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of 30
+            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+        };
+
+        cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+            console.log('MongoDB successfully connected');
             return mongooseInstance;
         });
     }
@@ -36,6 +41,7 @@ export const connectToDatabase = async () => {
         cached.conn = await cached.promise;
     } catch (err) {
         cached.promise = null;
+        console.error('MongoDB connection error details:', err);
         throw err;
     }
 

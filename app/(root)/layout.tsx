@@ -11,8 +11,10 @@ const Layout =async ({ children }: { children: React.ReactNode }) => {
     });
 
     if (!session?.user) redirect('/sign-in')
-    const user={...session.user};
-    user.image=session.user.image ||null;
+    const user = {
+        ...session.user,
+        image: session.user.image || null,
+    };
 
   return (
     <main className="min-h-screen text-gray-200">

@@ -25,9 +25,9 @@ function Layout({ children }: { children: ReactNode }) {
                 </div>
             </section>
 
-            <section className="auth-right-section flex flex-col justify-center px-10">
-                <div className='z-10 relative lg:mt-4 lg:mb-8'>
-                    <div className={'grid grid-cols-[minmax(0,1fr)_auto] items-end w-full'}>
+            <section className="auth-right-section flex flex-col justify-center px-10 order-2 lg:order-2">
+                <div className='z-0 relative lg:mt-4 lg:mb-8'>
+                    <div className={'grid grid-cols-1 items-end w-full'}>
                         <TestimonialRotator intervalMs={7000} />
                     </div>
                 </div>

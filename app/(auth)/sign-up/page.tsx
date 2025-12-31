@@ -10,6 +10,8 @@ import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 
+
+
 function SignUp() {
     const router=useRouter();
   {/* Initialize form state with validation rules and default values */}
@@ -32,21 +34,17 @@ function SignUp() {
   });
 
   {/* Process form submission with error handling */}
-  const onSubmit = async (data: SignUpFormData) => {
-    try {
-      const result = await signUpWithEmail(data);
-          
-          if (result && result.success) {
-            toast.success('Account created successfully!');
-            router.push('/');
-          } else {
-            toast.error(result?.message || 'Sign Up Failed');
-          }
-        } catch (e) {
+    const onSubmit=async (data:SignUpFormData)=>{
+      try {
+          const result=await signUpWithEmail(data);
+          if (result.success) router.push('/');
+      } catch (e) {
           console.error(e);
-          toast.error('An unexpected error occurred. Please try again.');
-        }
-  };
+          toast.error('SignUp Failed,Please Try Again.',{
+              description:e instanceof Error ? e.message : 'Failed To Sign Up, Please Try Again. Later',
+          })
+      }
+    }
 
   return (
       <form

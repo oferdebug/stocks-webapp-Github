@@ -5,16 +5,15 @@ import UserDropDown from "@/components/UserDropDown";
 
 interface HeaderProps {
     user: {
-        id: string;
-        name: string;
-        email: string;
+        id?: string;
+        name?: string;
+        email?: string;
         image?: string | null;
-        [key: string]: unknown; // Match the index signature in UserDropDown
+        [key: string]: any; // Match the index signature in UserDropDown
     } | null;
 }
 
 const Header = ({ user }: HeaderProps) => {
-    let session;
     return (
         <header className="sticky top-0 z-50 bg-black border-b border-gray-800">
             <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 flex h-16 items-center justify-between">
@@ -28,7 +27,6 @@ const Header = ({ user }: HeaderProps) => {
                         priority
                     />
                 </Link>
-
                 <nav className="hidden sm:block">
                     <NavItems />
                 </nav>
