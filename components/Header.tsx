@@ -13,7 +13,7 @@ interface HeaderProps {
     } | null;
 }
 
-const Header = ({ user }: HeaderProps) => {
+const Header = ({ user }: {user: User}) => {
     return (
         <header className="sticky top-0 z-50 bg-black border-b border-gray-800">
             <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 flex h-16 items-center justify-between">
@@ -30,7 +30,7 @@ const Header = ({ user }: HeaderProps) => {
                 <nav className="hidden sm:block">
                     <NavItems />
                 </nav>
-                <UserDropDown asChild={false} user={user} />
+                <UserDropDown user={user}  />
             </div>
         </header>
     )

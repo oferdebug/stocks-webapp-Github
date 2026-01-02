@@ -1,25 +1,25 @@
 import * as mongoose from "mongoose";
 
-const MONGODB_URI=process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 
 declare global {
-    var mongooseCache:{
-        conn:typeof mongoose|null;
-        promise:Promise<typeof mongoose>|null;
+    var mongooseCache: {
+        conn: typeof mongoose | null;
+        promise: Promise<typeof mongoose> | null;
     }
 }
 
 
-let cached=global.mongooseCache;
+let cached = global.mongooseCache;
 
 if (!cached) {
-    cached=global.mongooseCache={conn:null,promise:null};
+    cached = global.mongooseCache = {conn: null, promise: null};
 }
 
 
 export const connectToDatabase = async () => {
-    if (!MONGODB_URI) throw new Error('MONGODB_URI must be set within .env');
+    if (!MONGODB_URI) throw new Error('MONGODB_URI must be set within .env.local');
 
     if (cached.conn) return cached.conn;
 

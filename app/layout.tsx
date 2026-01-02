@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/lib/better-auth/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -28,11 +29,15 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         headers: await headers(),
     });
 
-    const user = session?.user ? {
-        ...session.user,
-        image: session.user.image || null,
-    } : null;
+    if (!session?.user) redirect('/sign-in');
 
+    const user= {
+        id:session.user.id,
+        name:session.user.name,
+        email:session.user.email,
+    }
+
+    
     return (
         <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
         <body className="antialiased">

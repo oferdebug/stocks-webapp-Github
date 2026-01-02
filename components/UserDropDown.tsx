@@ -8,15 +8,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
-import {Button} from '@/components/ui/button';
-import {useRouter} from 'next/navigation';
-import {LogOut} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { LogOut } from "lucide-react";
 import NavItems from "@/components/NavItems";
-
-{/* Senior Note: Defining the user as optional (?) and allowing null/undefined
-    is crucial for Next.js apps where the session might be loading. */
-}
 
 interface UserDropDownProps {
     user?: {
@@ -26,82 +22,82 @@ interface UserDropDownProps {
         image?: string | null;
         [key: string]: any;
     } | null;
-
-    asChild?: boolean;
 }
 
-
-
-const UserDropDown = ({ user, asChild }: UserDropDownProps) => {
-    
+const UserDropDown = ({ user }: UserDropDownProps) => {
     const router = useRouter();
 
+    /* SENIOR NOTE: Calculation inside component scope */
+    const userInitials = user?.name
+        ?.split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase() || "U";
+
     const handleSignOut = () => {
-        {/* Logic for sign out should clear the session/cookies before redirecting */}
         router.push('/sign-in');
     };
 
-    {/* Pre-calculating initials to keep the JSX clean and readable */}
-    const userInitials = user?.name?.[0]?.toUpperCase() || 'User';
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
                     variant="ghost"
-                    className="flex items-center gap-3 text-green-400 hover:text-green-500 hover:bg-transparent focus-visible:ring-0"
+                    className="flex items-center gap-3 hover:bg-transparent focus-visible:ring-0 p-0"
                 >
                     <Avatar className="h-8 w-8">
-                        {/* Senior Tip: Use user?.image if your auth provider supports it, otherwise fallback to default */}
                         <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"} />
                         <AvatarFallback className="bg-green-500 text-green-900 text-sm font-bold">
                             {userInitials}
                         </AvatarFallback>
                     </Avatar>
-                    <div className="hidden md:flex flex-col items-start">
-                    <span className="text-base font-medium text-white hover:text-green-500 transition-colors">
-                    {user?.name || "Guest"}
-                    </span>
-                    </div>
                 </Button>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent
-                className="bg-gray-800  border-gray-600 text-gray-200 hover:text-green-400 transition-colors ">
-                <DropdownMenuLabel>
-                    <div className="flex relative items-center gap-3 py-3">
-                        <Avatar className="h-10 w-10">
+                className="bg-[#0d1117] border-[#30363d] text-gray-200 w-56 shadow-2xl rounded-xl"
+                align="end"
+            >
+                {/* ... (Header code remains the same) ... */}
+                <DropdownMenuLabel className="p-0">
+                    <div className="flex items-center gap-3 p-4">
+                        <Avatar className="h-10 w-10 border border-[#30363d]">
                             <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"} />
                             <AvatarFallback className="bg-green-500 text-green-900 text-sm font-bold">
                                 {userInitials}
                             </AvatarFallback>
                         </Avatar>
-                        <div className="flex flex-col">
-                            <span className="text-base font-medium text-white hover:text-green-500 transition-colors">
-                                {/* Fixed: Displaying full name instead of just the initial inside the dropdown */}
+                        <div className="flex flex-col space-y-1">
+                            <span className="text-sm font-semibold text-white leading-none">
                                 {user?.name || "User"}
                             </span>
-                            <span className="text-sm text-white hover:text-green-500 transition-colors">
+                            <span className="text-xs text-gray-400 leading-none">
                                 {user?.email || "No email provided"}
                             </span>
                         </div>
                     </div>
                 </DropdownMenuLabel>
 
-                <DropdownMenuSeparator className="hidden sm:block bg-green-600" />
-
-                {/* Mobile Navigation fallback integrated into the dropdown */}
-                <nav className="sm:hidden">
-                    <NavItems />
-                    <DropdownMenuSeparator className="bg-green-600" />
-                </nav>
+                <DropdownMenuSeparator className="bg-[#30363d] my-1" />
 
                 <DropdownMenuItem
                     onClick={handleSignOut}
-                    className="text-white text-md font-medium focus:text-green-500 transition-colors cursor-pointer"
+                    className="text-gray-300 focus:text-white focus:bg-[#1f242c] cursor-pointer py-3 px-4 m-1 rounded-md"
                 >
-                    <LogOut className="h-4 w-4 mr-2 hidden sm:block" />
+                    <LogOut className="h-4 w-4 mr-3" />
                     Log Out
                 </DropdownMenuItem>
+
+                {/* SENIOR FIX:
+                    Passing 'className' prop to override the default 'sm:flex-row'.
+                    'flex-col' forces vertical layout.
+                    '!items-start' forces left alignment.
+                    'sm:gap-2' reduces the gap for the tight dropdown space.
+                */}
+                <div className="px-2 pb-2">
+                    <NavItems className="flex-col sm:flex-col items-start sm:gap-1 p-0" />
+                </div>
+
             </DropdownMenuContent>
         </DropdownMenu>
     );

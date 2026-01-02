@@ -1,54 +1,50 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
-import { Button } from "@/components/ui/button";
+import {useForm} from 'react-hook-form';
+import {Button} from "@/components/ui/button";
 import InputField from "@/components/forms/inputField";
 import FooterLink from "@/components/forms/FooterLink";
-import { authClient } from "@/lib/better-auth/client";
-import { useState } from "react";
+import {authClient} from "@/lib/better-auth/client";
+import {useState} from "react";
+import {signInWithEmail, signUpWithEmail} from "@/lib/actions/auth.actions";
+import {toast} from "sonner";
+import {error} from "better-auth/api";
+import {useRouter} from "next/navigation";
 
 function SignIn() {
+    const router = useRouter();
+    {/* Initialize form state with validation rules and default values */
+    }
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: {errors, isSubmitting},
     } = useForm<SignInFormData>({
-        defaultValues: { email: '', password: '' },
+        defaultValues: {email: '', password: ''},
         mode: 'onBlur'
     });
 
-    const onSubmit = async (data: SignInFormData) => {
-        setErrorMsg(null);
-        try {
-            // Authenticating via better-auth with MongoDB adapter
-            const { error } = await authClient.signIn.email({
-                email: data.email,
-                password: data.password,
-                callbackURL: "/",
-            });
 
-            if (error) {
-                // Setting error message from server response
-                setErrorMsg(error.message || "Invalid email or password");
-            } else {
-                // Hard refresh to sync session with Server Components
-                window.location.href = "/";
-            }
+    const onSubmit = async (data: SignInFormData) => {
+        try {
+            const result = await signInWithEmail(data);
+            if (result.success) router.push('/');
         } catch (e) {
-            // Catching unexpected auth service errors
-            console.error("Auth Error:", e);
-            setErrorMsg("An unexpected error occurred.");
+            console.error(e);
+            toast.error('SignIn Failed,Please Try Again.', {
+                description: e instanceof Error ? e.message : 'Failed To SignIn, Please Try Again. Later',
+            })
         }
     };
-
     return (
         <div className="relative overflow-hidden">
             <h1 className="form-title">Sign In & Start Enjoying Your Experience!</h1>
 
             {errorMsg && (
-                <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-md mb-4 text-sm text-center">
+                <div
+                    className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-md mb-4 text-sm text-center">
                     {errorMsg}
                 </div>
             )}
@@ -60,7 +56,7 @@ function SignIn() {
                     placeholder="contact@NextTrade.com"
                     register={register}
                     error={errors.email}
-                    validation={{ required: 'Full Email Is Required' }}
+                    validation={{required: 'Full Email Is Required'}}
                 />
 
                 <InputField
@@ -70,14 +66,14 @@ function SignIn() {
                     register={register}
                     type="password"
                     error={errors.password}
-                    validation={{ required: 'Password Is Required' }}
+                    validation={{required: 'Password Is Required'}}
                 />
 
                 <Button type="submit" disabled={isSubmitting} className="green-btn w-full mt-5">
                     {isSubmitting ? 'Signing In...' : 'Sign In Now'}
                 </Button>
 
-                <FooterLink text="Don't Have An Account?" linkText="SignUp" href="/sign-up" />
+                <FooterLink text="Don't Have An Account?" linkText="SignUp" href="/sign-up"/>
             </form>
         </div>
     );

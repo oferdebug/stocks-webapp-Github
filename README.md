@@ -4,7 +4,7 @@
 
 <img src="https://readme-typing-svg.demolab.com? font=Fira+Code&size=32&duration=2800&pause=2000&color=00D9FF&center=true&vCenter=true&width=940&lines=The+Future+of+Market+Analytics+💎;Real-Time+Stock+Trading+Platform+🚀;Built+with+Next.js+%26+TypeScript+⚡;AI-Powered+Investment+Intelligence+🧠" alt="Typing SVG" />
 
-### 🌟 **Track.  Analyze.  Dominate.** 🌟
+### 🌟 **Track. Analyze. Dominate.** 🌟
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -21,7 +21,9 @@
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700">
 
-**[🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [💻 Tech Stack](#-tech-stack) • [📸 Screenshots](#-screenshots) • [🗺️ Roadmap](#️-roadmap) • [🤝 Contributing](#-contributing)**
+*
+*[🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [💻 Tech Stack](#-tech-stack) • [📸 Screenshots](#-screenshots) • [🗺️ Roadmap](#️-roadmap) • [🤝 Contributing](#-contributing)
+**
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
@@ -37,9 +39,11 @@
 
 ### 💡 **The Vision**
 
-NextTrade is not just another stock tracker—it's a **revolution** in how investors interact with financial markets. Built with cutting-edge technology and powered by AI, we're creating the ultimate platform for the modern trader.
+NextTrade is not just another stock tracker—it's a **revolution** in how investors interact with financial markets.
+Built with cutting-edge technology and powered by AI, we're creating the ultimate platform for the modern trader.
 
 #### 🎯 **Our Mission**
+
 > *To democratize advanced market analytics and empower every investor with institutional-grade tools.*
 
 </td>
@@ -123,16 +127,16 @@ NextTrade is not just another stock tracker—it's a **revolution** in how inves
 
 <br>
 
-| Category | Features |
-|----------|----------|
-| 📈 **Market Data** | Real-time quotes • Historical data • Market news • Economic calendar • Earnings reports • Dividend tracking |
-| 💹 **Trading Tools** | Watchlists • Price alerts • Limit orders • Stop-loss • OCO orders • Bracket orders |
-| 📊 **Analysis** | Technical indicators • Chart patterns • Candlestick patterns • Volume analysis • Correlation matrix |
-| 🤖 **Automation** | Auto-rebalancing • Dollar-cost averaging • Strategy backtesting • Trade journaling • API integration |
-| 📱 **User Experience** | Dark/Light mode • Customizable dashboard • Keyboard shortcuts • Multi-language • Mobile responsive |
-| 🔐 **Security** | 2FA authentication • Encrypted storage • API key management • Audit logs • Session management |
-| 🌍 **Global Markets** | 50+ countries • 100+ exchanges • Stocks • ETFs • Crypto • Forex • Commodities |
-| 📈 **Analytics** | Performance metrics • Sharpe ratio • Alpha/Beta • Drawdown analysis • Risk assessment |
+| Category               | Features                                                                                                    |
+|------------------------|-------------------------------------------------------------------------------------------------------------|
+| 📈 **Market Data**     | Real-time quotes • Historical data • Market news • Economic calendar • Earnings reports • Dividend tracking |
+| 💹 **Trading Tools**   | Watchlists • Price alerts • Limit orders • Stop-loss • OCO orders • Bracket orders                          |
+| 📊 **Analysis**        | Technical indicators • Chart patterns • Candlestick patterns • Volume analysis • Correlation matrix         |
+| 🤖 **Automation**      | Auto-rebalancing • Dollar-cost averaging • Strategy backtesting • Trade journaling • API integration        |
+| 📱 **User Experience** | Dark/Light mode • Customizable dashboard • Keyboard shortcuts • Multi-language • Mobile responsive          |
+| 🔐 **Security**        | 2FA authentication • Encrypted storage • API key management • Audit logs • Session management               |
+| 🌍 **Global Markets**  | 50+ countries • 100+ exchanges • Stocks • ETFs • Crypto • Forex • Commodities                               |
+| 📈 **Analytics**       | Performance metrics • Sharpe ratio • Alpha/Beta • Drawdown analysis • Risk assessment                       |
 
 </details>
 
@@ -164,12 +168,14 @@ mongo --version  # ✓ 7.0.0 or higher
 <td>
 
 **1️⃣ Clone the Repo**
+
 ```bash
 git clone https://github.com/oferdebug/stocks-webapp-Github.git
 cd stocks-webapp-Github
 ```
 
 **2️⃣ Install Dependencies**
+
 ```bash
 yarn install
 # or use the turbo mode 🚀
@@ -180,12 +186,14 @@ yarn install --frozen-lockfile
 <td>
 
 **3️⃣ Setup Environment**
+
 ```bash
-cp .env.example .env.local
-# Edit .env.local with your configs
+cp .env.local.example .env.local.local
+# Edit .env.local.local with your configs
 ```
 
 **4️⃣ Launch!  🚀**
+
 ```bash
 yarn dev
 # Open http://localhost:3000
@@ -273,29 +281,29 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ### 🎨 **Frontend Arsenal**
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="20"/> **Next.js** | `16.0.10` | React Framework & SSR |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20"/> **React** | `19.2.1` | UI Components |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20"/> **TypeScript** | `5.0+` | Type Safety |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="20"/> **Tailwind CSS** | `4.0` | Styling |
-| 🎨 **Radix UI** | `Latest` | Accessible Components |
-| 🎭 **Lucide Icons** | `0.562.0` | Icon Library |
-| 🪝 **React Hook Form** | `7.69.0` | Form Management |
+| Technology                                                                                                                    | Version   | Purpose               |
+|-------------------------------------------------------------------------------------------------------------------------------|-----------|-----------------------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="20"/> **Next.js**             | `16.0.10` | React Framework & SSR |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20"/> **React**                 | `19.2.1`  | UI Components         |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20"/> **TypeScript**  | `5.0+`    | Type Safety           |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="20"/> **Tailwind CSS** | `4.0`     | Styling               |
+| 🎨 **Radix UI**                                                                                                               | `Latest`  | Accessible Components |
+| 🎭 **Lucide Icons**                                                                                                           | `0.562.0` | Icon Library          |
+| 🪝 **React Hook Form**                                                                                                        | `7.69.0`  | Form Management       |
 
 </td>
 <td width="50%">
 
 ### ⚙️ **Backend Power**
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="20"/> **MongoDB** | `7.0.0` | NoSQL Database |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" width="20"/> **Mongoose** | `9.0.2` | ODM |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> **Node. js** | `18+` | Runtime |
-| 🚀 **Next.js API** | `16.0` | Serverless Functions |
-| 🔐 **NextAuth** | `Latest` | Authentication |
-| 📡 **REST API** | `Custom` | Data Layer |
+| Technology                                                                                                             | Version  | Purpose              |
+|------------------------------------------------------------------------------------------------------------------------|----------|----------------------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="20"/> **MongoDB**    | `7.0.0`  | NoSQL Database       |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" width="20"/> **Mongoose** | `9.0.2`  | ODM                  |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> **Node. js**     | `18+`    | Runtime              |
+| 🚀 **Next.js API**                                                                                                     | `16.0`   | Serverless Functions |
+| 🔐 **NextAuth**                                                                                                        | `Latest` | Authentication       |
+| 📡 **REST API**                                                                                                        | `Custom` | Data Layer           |
 
 </td>
 </tr>
@@ -403,6 +411,7 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 <td width="50%">
 
 #### 🏠 **Dashboard**
+
 ![Dashboard](https://via.placeholder.com/500x300/0D1117/00D9FF?text=Dashboard+Coming+Soon)
 *Real-time portfolio overview with live market data*
 
@@ -410,6 +419,7 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 <td width="50%">
 
 #### 📊 **Analytics**
+
 ![Analytics](https://via.placeholder.com/500x300/0D1117/00D9FF?text=Analytics+Coming+Soon)
 *Advanced charting with technical indicators*
 
@@ -419,6 +429,7 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 <td width="50%">
 
 #### 💰 **Portfolio**
+
 ![Portfolio](https://via.placeholder.com/500x300/0D1117/00D9FF?text=Portfolio+Coming+Soon)
 *Comprehensive portfolio management*
 
@@ -426,6 +437,7 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 <td width="50%">
 
 #### 📱 **Mobile**
+
 ![Mobile](https://via.placeholder.com/500x300/0D1117/00D9FF?text=Mobile+Coming+Soon)
 *Fully responsive mobile experience*
 
@@ -520,6 +532,7 @@ gantt
 <br>
 
 ### ✅ **Phase 1: Core Features** (Completed)
+
 - [x] Real-time stock price tracking
 - [x] Portfolio management dashboard
 - [x] Multi-currency support
@@ -528,6 +541,7 @@ gantt
 - [x] MongoDB integration
 
 ### 🚧 **Phase 2: Advanced Analytics** (In Progress)
+
 - [x] Advanced charting with 50+ indicators
 - [ ] Pattern recognition (AI-powered)
 - [ ] News sentiment analysis
@@ -536,6 +550,7 @@ gantt
 - [ ] Backtesting engine
 
 ### 📅 **Phase 3: Social & Mobile** (Q1 2026)
+
 - [ ] Mobile app (React Native)
 - [ ] Follow traders & copy trading
 - [ ] Social feed & discussions
@@ -544,6 +559,7 @@ gantt
 - [ ] Push notifications
 
 ### 🚀 **Phase 4: Pro Features** (Q2 2026)
+
 - [ ] Options & derivatives tracking
 - [ ] Algorithmic trading strategies
 - [ ] API for third-party integrations
@@ -552,6 +568,7 @@ gantt
 - [ ] Tax optimization tools
 
 ### 🌟 **Phase 5: Enterprise** (Q3 2026)
+
 - [ ] White-label solution
 - [ ] Multi-user workspaces
 - [ ] Admin dashboard
@@ -567,14 +584,14 @@ gantt
 
 <div align="center">
 
-| 📖 Category | 📝 Description | 🔗 Link |
-|-------------|----------------|---------|
-| 🚀 **Getting Started** | Installation & setup guide | [View Docs](#-quick-start) |
-| 💻 **API Reference** | Complete API documentation | Coming Soon |
-| 🎨 **Component Library** | UI component showcase | Coming Soon |
-| 🏗️ **Architecture** | System design & patterns | Coming Soon |
-| 🔐 **Security** | Security best practices | Coming Soon |
-| 🤝 **Contributing** | Contribution guidelines | [View Guide](#-contributing) |
+| 📖 Category              | 📝 Description             | 🔗 Link                      |
+|--------------------------|----------------------------|------------------------------|
+| 🚀 **Getting Started**   | Installation & setup guide | [View Docs](#-quick-start)   |
+| 💻 **API Reference**     | Complete API documentation | Coming Soon                  |
+| 🎨 **Component Library** | UI component showcase      | Coming Soon                  |
+| 🏗️ **Architecture**     | System design & patterns   | Coming Soon                  |
+| 🔐 **Security**          | Security best practices    | Coming Soon                  |
+| 🤝 **Contributing**      | Contribution guidelines    | [View Guide](#-contributing) |
 
 </div>
 
@@ -599,6 +616,7 @@ gantt
 <td>
 
 **1️⃣ Fork & Clone**
+
 ```bash
 # Fork the repo on GitHub
 git clone https://github.com/YOUR_USERNAME/stocks-webapp-Github.git
@@ -606,6 +624,7 @@ cd stocks-webapp-Github
 ```
 
 **2️⃣ Create Branch**
+
 ```bash
 git checkout -b feature/amazing-feature
 ```
@@ -614,6 +633,7 @@ git checkout -b feature/amazing-feature
 <td>
 
 **3️⃣ Make Changes**
+
 ```bash
 # Make your changes
 git add .
@@ -621,6 +641,7 @@ git commit -m "✨ Add amazing feature"
 ```
 
 **4️⃣ Push & PR**
+
 ```bash
 git push origin feature/amazing-feature
 # Create Pull Request on GitHub
@@ -636,17 +657,20 @@ git push origin feature/amazing-feature
 <summary><b>Click to expand guidelines</b></summary>
 
 #### ✅ **Code Style**
+
 - Follow the existing code style
 - Use TypeScript for all new files
 - Write meaningful commit messages (use [Conventional Commits](https://www.conventionalcommits.org/))
 - Add comments for complex logic
 
 #### 🧪 **Testing**
+
 - Write tests for new features
 - Ensure all tests pass before submitting PR
 - Update documentation as needed
 
 #### 📝 **Commit Message Format**
+
 ```
 <type>(<scope>): <subject>
 
@@ -656,6 +680,7 @@ git push origin feature/amazing-feature
 ```
 
 **Types:**
+
 - ✨ `feat`: New feature
 - 🐛 `fix`: Bug fix
 - 📚 `docs`: Documentation
@@ -666,6 +691,7 @@ git push origin feature/amazing-feature
 - 🔧 `chore`: Maintenance
 
 **Example:**
+
 ```
 ✨ feat(portfolio): add asset allocation chart
 
@@ -700,7 +726,8 @@ Closes #123
 
 <br><br>
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api? username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=00D9FF)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?
+username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=00D9FF)
 
 </div>
 
@@ -710,12 +737,12 @@ Closes #123
 
 <div align="center">
 
-| Metric | Score | Status |
-|--------|-------|--------|
-| ⚡ **Performance** | 98/100 | 🟢 Excellent |
-| ♿ **Accessibility** | 100/100 | 🟢 Perfect |
-| 🎯 **Best Practices** | 95/100 | 🟢 Great |
-| 🔍 **SEO** | 100/100 | 🟢 Perfect |
+| Metric                | Score   | Status       |
+|-----------------------|---------|--------------|
+| ⚡ **Performance**     | 98/100  | 🟢 Excellent |
+| ♿ **Accessibility**   | 100/100 | 🟢 Perfect   |
+| 🎯 **Best Practices** | 95/100  | 🟢 Great     |
+| 🔍 **SEO**            | 100/100 | 🟢 Perfect   |
 
 </div>
 
@@ -729,14 +756,14 @@ Closes #123
 
 </div>
 
-| Feature | Implementation |
-|---------|----------------|
-| 🔒 **Authentication** | NextAuth.js with JWT & OAuth 2.0 |
-| 🔐 **Encryption** | AES-256 for sensitive data |
-| 🚫 **Rate Limiting** | API rate limiting & DDoS protection |
-| 🔍 **Auditing** | Complete audit logs |
-| 🛡️ **HTTPS Only** | Enforced SSL/TLS |
-| 🔑 **Secrets** | Environment variables & Vault |
+| Feature               | Implementation                      |
+|-----------------------|-------------------------------------|
+| 🔒 **Authentication** | NextAuth.js with JWT & OAuth 2.0    |
+| 🔐 **Encryption**     | AES-256 for sensitive data          |
+| 🚫 **Rate Limiting**  | API rate limiting & DDoS protection |
+| 🔍 **Auditing**       | Complete audit logs                 |
+| 🛡️ **HTTPS Only**    | Enforced SSL/TLS                    |
+| 🔑 **Secrets**        | Environment variables & Vault       |
 
 **Found a security issue? ** Please email security@nexttrade.com
 
@@ -768,13 +795,13 @@ is strictly prohibited.
 
 <br>
 
-| Technology | Thanks To |
-|------------|-----------|
-| ⚡ **Next.js** | [Vercel Team](https://vercel.com/) |
-| 🎨 **shadcn/ui** | [shadcn](https://ui.shadcn.com/) |
-| 🎭 **Lucide Icons** | [Lucide Team](https://lucide.dev/) |
+| Technology            | Thanks To                                     |
+|-----------------------|-----------------------------------------------|
+| ⚡ **Next.js**         | [Vercel Team](https://vercel.com/)            |
+| 🎨 **shadcn/ui**      | [shadcn](https://ui.shadcn.com/)              |
+| 🎭 **Lucide Icons**   | [Lucide Team](https://lucide.dev/)            |
 | 🤖 **GitHub Copilot** | [GitHub](https://github.com/features/copilot) |
-| 💾 **MongoDB** | [MongoDB Inc.](https://www.mongodb.com/) |
+| 💾 **MongoDB**        | [MongoDB Inc.](https://www.mongodb.com/)      |
 
 ### 🌟 **Special Thanks**
 
@@ -800,6 +827,7 @@ is strictly prohibited.
 <td align="center" width="33%">
 
 ### 👤 **Creator**
+
 **Ofer**<br>
 [@oferdebug](https://github.com/oferdebug)
 
@@ -807,12 +835,14 @@ is strictly prohibited.
 <td align="center" width="33%">
 
 ### 🐙 **Repository**
+
 [stocks-webapp-Github](https://github.com/oferdebug/stocks-webapp-Github)
 
 </td>
 <td align="center" width="33%">
 
 ### 💼 **LinkedIn**
+
 Connect with me! <br>
 [linkedin.com/in/ofer](#)
 
@@ -850,14 +880,14 @@ by starring the repo!
 
 **🍴 Fork**<br>
 Create your own<br>
-version of NextTrade! 
+version of NextTrade!
 
 </td>
 <td align="center">
 
 **🐛 Report Bugs**<br>
 Help us improve<br>
-by reporting issues! 
+by reporting issues!
 
 </td>
 <td align="center">
