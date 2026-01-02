@@ -2,17 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type {ReactNode} from "react";
-import {TestimonialRotator} from "@/components/testimonials/TestimonialRotator";
-import {cn} from "@/lib/utils";
-import {redirect} from "next/navigation";
-import {auth} from "@/lib/better-auth/auth";
-import {headers} from "next/dist/server/request/headers";
+import type { ReactNode } from "react";
+import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator";
 
-const Layout = async ({children}: { children: ReactNode }) => {
-    const session = await auth.api.getSession({headers: await headers()})
-
-    if (!session?.user) redirect('/');
+function Layout({ children }: { children: ReactNode }) {
     return (
         <main className="auth-layout">
             <section className="auth-left-section scrollbar-hide-default scroll-pt-12">
@@ -31,29 +24,26 @@ const Layout = async ({children}: { children: ReactNode }) => {
                 </div>
             </section>
 
-            <section className="auth-right-section flex flex-col justify-center px-10 order-2 lg:order-2">
-                <div className='z-0 relative lg:mt-4 lg:mb-8'>
-                    <div className={'grid grid-cols-1 items-end w-full'}>
-                        <TestimonialRotator intervalMs={7000}/>
+            <section className="auth-right-section flex flex-col justify-center px-10">
+                <div className='z-10 relative lg:mt-4 lg:mb-8'>
+                    <div className={'grid grid-cols-[minmax(0,1fr)_auto] items-end w-full'}>
+                        <TestimonialRotator intervalMs={7000} />
                     </div>
                 </div>
 
                 {/* Dashboard Preview  */}
                 <div className="relative mt-10 flex justify-center w-full">
-                    <div
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[50%] bg-emerald-500/10 blur-[100px] rounded-full"/>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[50%] bg-emerald-500/10 blur-[100px] rounded-full" />
                     <div className="relative dashboard-preview-container [perspective:2000px] w-full max-w-[850px]">
                         <Image
                             src="/assets/images/485_1x_shots_so.png"
                             alt="NextTrade Dashboard Preview"
                             width={1200}
                             height={800}
-                            className={cn(
-                                "rounded-2xl border border-white/10 shadow-2xl",
-                                "transform-gpu transition-all duration-700 ease-out",
-                                "[rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]",
-                                "hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
-                            )}
+                            className="rounded-2xl border border-white/10 shadow-2xl
+                           transform-gpu transition-all duration-700 ease-out
+                           [rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]
+                           hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
                             priority
                         />
                     </div>
