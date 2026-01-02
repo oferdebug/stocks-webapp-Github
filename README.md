@@ -2,7 +2,7 @@
 
 # 📈✨ **NextTrade** ✨📊
 
-<img src="https://readme-typing-svg.demolab.com? font=Fira+Code&size=32&duration=2800&pause=2000&color=00D9FF&center=true&vCenter=true&width=940&lines=The+Future+of+Market+Analytics+💎;Real-Time+Stock+Trading+Platform+🚀;Built+with+Next.js+%26+TypeScript+⚡;AI-Powered+Investment+Intelligence+🧠" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=00D9FF&center=true&vCenter=true&width=940&lines=The+Future+of+Market+Analytics+💎;Real-Time+Stock+Trading+Platform+🚀;Built+with+Next.js+%26+TypeScript+⚡;AI-Powered+Investment+Intelligence+🧠" alt="Typing SVG" />
 
 ### 🌟 **Track. Analyze. Dominate.** 🌟
 
@@ -13,7 +13,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 ![License](https://img.shields.io/badge/license-Private-red?style=for-the-badge)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen. svg?style=for-the-badge)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/oferdebug/stocks-webapp-Github?style=for-the-badge&color=yellow)
 ![Forks](https://img.shields.io/github/forks/oferdebug/stocks-webapp-Github?style=for-the-badge&color=blue)
 ![Issues](https://img.shields.io/github/issues/oferdebug/stocks-webapp-Github?style=for-the-badge&color=orange)
@@ -21,9 +21,7 @@
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700">
 
-*
-*[🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [💻 Tech Stack](#-tech-stack) • [📸 Screenshots](#-screenshots) • [🗺️ Roadmap](#️-roadmap) • [🤝 Contributing](#-contributing)
-**
+**[🎯 Features](#-features) • [🚀 Quick Start](#-quick-start) • [💻 Tech Stack](#-tech-stack) • [📸 Screenshots](#-screenshots) • [🗺️ Roadmap](#️-roadmap) • [🤝 Contributing](#-contributing)**
 
 <img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="1000">
 
@@ -49,7 +47,7 @@ Built with cutting-edge technology and powered by AI, we're creating the ultimat
 </td>
 <td width="50%">
 
-### 🏆 **Why NextTrade? **
+### 🏆 **Why NextTrade?**
 
 - ⚡ **Lightning Fast** - Real-time updates in milliseconds
 - 🧠 **AI-Powered** - Smart insights & predictions
@@ -146,7 +144,7 @@ Built with cutting-edge technology and powered by AI, we're creating the ultimat
 
 <div align="center">
 
-### 🎬 **Get Started in 60 Seconds! **
+### 🎬 **Get Started in 60 Seconds!**
 
 <img src="https://user-images.githubusercontent.com/74038190/212257454-16e3712e-945a-4ca2-b238-408ad0bf87e6.gif" width="100">
 
@@ -188,11 +186,11 @@ yarn install --frozen-lockfile
 **3️⃣ Setup Environment**
 
 ```bash
-cp .env.local.example .env.local.local
-# Edit .env.local.local with your configs
+cp .env.local.example .env.local
+# Edit .env.local with your configs
 ```
 
-**4️⃣ Launch!  🚀**
+**4️⃣ Launch! 🚀**
 
 ```bash
 yarn dev
@@ -206,7 +204,7 @@ yarn dev
 ### 🔐 **Environment Variables**
 
 <details>
-<summary><b>Click to expand . env.local template</b></summary>
+<summary><b>Click to expand .env.local template</b></summary>
 
 ```env
 # ═══════════════════════════════════════════════════════
@@ -300,7 +298,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 |------------------------------------------------------------------------------------------------------------------------|----------|----------------------|
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="20"/> **MongoDB**    | `7.0.0`  | NoSQL Database       |
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" width="20"/> **Mongoose** | `9.0.2`  | ODM                  |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> **Node. js**     | `18+`    | Runtime              |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> **Node.js**      | `18+`    | Runtime              |
 | 🚀 **Next.js API**                                                                                                     | `16.0`   | Serverless Functions |
 | 🔐 **NextAuth**                                                                                                        | `Latest` | Authentication       |
 | 📡 **REST API**                                                                                                        | `Custom` | Data Layer           |
@@ -370,7 +368,7 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 ┃ ┃ ┗ 📄 Stock.ts                  📈 Stock model
 ┃ ┗ 📄 connection.ts               🔌 DB connection
 ┣ 📂 lib/                          🛠️ Utilities & Helpers
-┃ ┣ 📄 utils. ts                    🔧 Helper functions
+┃ ┣ 📄 utils.ts                    🔧 Helper functions
 ┃ ┣ 📄 api-client.ts               📡 API client
 ┃ ┗ 📄 constants.ts                📌 Constants
 ┣ 📂 hooks/                        🪝 Custom React Hooks
@@ -387,15 +385,15 @@ JavaScript █░░░░░░░░░░░░░░░░░░░░░░
 ┣ 📂 scripts/                      🔧 Build Scripts
 ┃ ┣ 📄 seed.ts                     🌱 Database seeding
 ┃ ┗ 📄 migrate.ts                  🔄 Migrations
-┣ 📂 . github/                      🐙 GitHub Configs
+┣ 📂 .github/                      🐙 GitHub Configs
 ┃ ┣ 📂 workflows/                  ⚙️ CI/CD pipelines
 ┃ ┗ 📄 CODEOWNERS                  👥 Code owners
 ┣ 📄 package.json                  📦 Dependencies
 ┣ 📄 tsconfig.json                 ⚙️ TS config
-┣ 📄 next.config.ts                🔧 Next. js config
+┣ 📄 next.config.ts                🔧 Next.js config
 ┣ 📄 tailwind.config.js            🎨 Tailwind config
-┣ 📄 . env.local                    🔐 Environment vars
-┗ 📄 README.md                     📖 You are here! 
+┣ 📄 .env.local                    🔐 Environment vars
+┗ 📄 README.md                     📖 You are here!
 ```
 
 ---
@@ -502,7 +500,7 @@ yarn test
 
 <div align="center">
 
-### 🎯 **What's Next? **
+### 🎯 **What's Next?**
 
 <img src="https://user-images.githubusercontent.com/74038190/212257472-08e52665-c503-4bd9-aa20-f5a4dae769b5.gif" width="100">
 
@@ -605,7 +603,7 @@ gantt
 
 <img src="https://user-images.githubusercontent.com/74038190/216644497-1951db19-8f3d-4e44-ac08-8e9d7e0d94a7.gif" width="200">
 
-**We're always looking for amazing contributors! **
+**We're always looking for amazing contributors!**
 
 </div>
 
@@ -712,7 +710,7 @@ Closes #123
   <img src="https://contrib.rocks/image?repo=oferdebug/stocks-webapp-Github" />
 </a>
 
-**Thank you to all our amazing contributors!  🙏**
+**Thank you to all our amazing contributors! 🙏**
 
 </div>
 
@@ -722,12 +720,11 @@ Closes #123
 
 <div align="center">
 
-<img src="https://repobeats.axiom.co/api/embed/YOUR_REPO_ID_HERE. svg" alt="Repobeats analytics image" />
+<img src="https://repobeats.axiom.co/api/embed/YOUR_REPO_ID_HERE.svg" alt="Repobeats analytics image" />
 
 <br><br>
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?
-username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=00D9FF)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00D9FF&icon_color=00D9FF)
 
 </div>
 
@@ -765,7 +762,7 @@ username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D
 | 🛡️ **HTTPS Only**    | Enforced SSL/TLS                    |
 | 🔑 **Secrets**        | Environment variables & Vault       |
 
-**Found a security issue? ** Please email security@nexttrade.com
+**Found a security issue?** Please email security@nexttrade.com
 
 ---
 
@@ -776,8 +773,8 @@ username=oferdebug&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D
 ```
 Copyright © 2025 NextTrade
 
-This project is private and proprietary. 
-All rights reserved. 
+This project is private and proprietary.
+All rights reserved.
 
 Unauthorized copying, distribution, or use of this software
 is strictly prohibited.
@@ -808,7 +805,7 @@ is strictly prohibited.
 - All our amazing contributors
 - The open-source community
 - Our early adopters & testers
-- You, for checking out this project!  🎉
+- You, for checking out this project! 🎉
 
 </div>
 
@@ -843,7 +840,7 @@ is strictly prohibited.
 
 ### 💼 **LinkedIn**
 
-Connect with me! <br>
+Connect with me!<br>
 [linkedin.com/in/ofer](#)
 
 </td>
@@ -908,6 +905,6 @@ for new features!
 
 <br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=170&section=footer&text=Thank%20You! %20⭐&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=72"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=170&section=footer&text=Thank%20You!%20⭐&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=72"/>
 
 </div>
