@@ -2,6 +2,11 @@ import {GoogleGenerativeAI} from "@google/generative-ai";
 
 const apiKey = "AIzaSyBJji8U23lGqZOyW8pFE9I40VhVE1OT6R0";
 
+/**
+ * Checks for available generative AI models via the Google Generative AI SDK.
+ *
+ * Attempts to retrieve model information for "gemini-pro" and logs progress; any errors are caught and logged.
+ */
 async function listModels() {
     console.log("--- בודק רשימת מודלים זמינים ---");
     try {

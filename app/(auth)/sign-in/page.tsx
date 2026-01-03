@@ -11,6 +11,15 @@ import {toast} from "sonner";
 import {error} from "better-auth/api";
 import {useRouter} from "next/navigation";
 
+/**
+ * Render a sign-in form and handle email/password authentication.
+ *
+ * The component submits form data to the authentication handler, navigates to the homepage on success,
+ * and surfaces failures via a toast notification (also logs the error). It also conditionally renders
+ * an inline error banner when `errorMsg` is set.
+ *
+ * @returns A JSX element containing the sign-in form and related UI.
+ */
 function SignIn() {
     const router = useRouter();
     {/* Initialize form state with validation rules and default values */

@@ -1,10 +1,9 @@
 import { connectToDatabase } from "../database/mongoose";
 
 /**
- * Tests the application's database connection and terminates the process based on the result.
+ * Test the application's database connection and exit the process with a status code indicating the outcome.
  *
- * Attempts to connect to the database, logs success or failure, and exits the process with
- * status code 0 on success or 1 on failure.
+ * Attempts to connect to the database; exits the process with status code 0 on success or 1 on failure.
  */
 async function testConnection() {
     try {

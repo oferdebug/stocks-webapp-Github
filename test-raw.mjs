@@ -1,5 +1,11 @@
 const apiKey = "AIzaSyDcsQIzOC8XEhKjGRcL1VTxt5CBosd9pxI";
 
+/**
+ * Send a content-generation request directly to the Gemini model and log the generated sentence or error details.
+ *
+ * This function constructs and POSTs a request to the Generative Language API using the module-level `apiKey`,
+ * then logs the first generated text candidate on success or logs HTTP/network error details on failure.
+ */
 async function testDirectFetch() {
     console.log("--- בדיקה ישירה ללא SDK ---");
 

@@ -3,6 +3,11 @@ import {GoogleGenerativeAI} from "@google/generative-ai";
 // מחקתי את dotenv - אנחנו שמים את המפתח ישר פה לבדיקה
 const apiKey = "AIzaSyBJji8U23lGqZOyW8pFE9I40VhVE1OT6R0";
 
+/**
+ * Performs a direct connectivity and content-generation test against the Google Gemini model and logs the result.
+ *
+ * Initializes the GoogleGenerativeAI client with the local apiKey, requests the "gemini-1.5-flash" model with the prompt "Just say: System Operational", and logs the model's text response or any connection error.
+ */
 async function testGemini() {
     console.log("--- מתחיל בדיקה ישירה (בלי קובץ env) ---");
 

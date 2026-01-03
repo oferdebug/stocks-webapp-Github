@@ -5,6 +5,12 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { TestimonialRotator } from "@/components/testimonials/TestimonialRotator";
 
+/**
+ * Render a two-column authentication layout with branding and content on the left and testimonials plus a dashboard preview on the right.
+ *
+ * @param children - Content rendered inside the left-side pane of the authentication layout
+ * @returns The composed authentication layout element containing the left branding/content area and the right testimonial/dashboard preview
+ */
 function Layout({ children }: { children: ReactNode }) {
     return (
         <main className="auth-layout">
