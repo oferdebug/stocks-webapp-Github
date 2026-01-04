@@ -29,7 +29,7 @@ export const sendWelcomeEmail = async ({email, name, intro}: WelcomeEmailData) =
     await transporter.sendMail(mailOptions);
 }
 
-export const sendDailyNewsEmail = async ({email, newsContent, date}: {
+export const sendDailyNewsSummaryEmail = async ({email, newsContent, date}: {
     email: string,
     newsContent: string,
     date: string

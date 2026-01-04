@@ -3,13 +3,14 @@ import Image from "next/image";
 import NavItems from "@/components/NavItems";
 import UserDropDown from "@/components/UserDropDown";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface HeaderProps {
     user: {
         id?: string;
         name?: string;
         email?: string;
         image?: string | null;
-        [key: string]: any;
+        [key: string]: unknown;
     } | null;
 }
 
@@ -37,3 +38,5 @@ const Header = ({ user }: {user: User}) => {
 }
 
 export default Header;
+
+

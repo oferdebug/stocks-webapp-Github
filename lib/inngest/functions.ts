@@ -1,8 +1,11 @@
 import {inngest} from "@/lib/inngest/client";
-import {PERSONALIZED_WELCOME_EMAIL_PROMPT, NEWS_SUMMARY_EMAIL_PROMPT} from "@/lib/inngest/prompts";
-import {sendDailyNewsEmail, sendWelcomeEmail} from "@/lib/nodemailer";
-import {connectToDatabase} from "@/database/mongoose";
+import {NEWS_SUMMARY_EMAIL_PROMPT, PERSONALIZED_WELCOME_EMAIL_PROMPT} from "@/lib/inngest/prompts";
+import {sendDailyNewsSummaryEmail as sendDailyNewsEmail, sendWelcomeEmail} from "@/lib/nodemailer/";
 import {GoogleGenerativeAI} from "@google/generative-ai";
+import {getAllUsersForNewsEmail} from "@/lib/actions/user.actions";
+import {getWatchlistSymbolsByEmail} from "@/lib/actions/watchlist.actions";
+import {getNews} from "@/lib/actions/finnhub.actions";
+import {getFormattedTodayDate} from "@/lib/utils";
 
 export const sendSignUpEmail = inngest.createFunction(
     {id: 'sign-up-email'},
@@ -55,62 +58,76 @@ export const sendSignUpEmail = inngest.createFunction(
     }
 );
 
-export const sendDailyMarketNews = inngest.createFunction(
-    {id: 'daily-market-news'},
-    {cron: '0 9 * * *'},
+
+export const sendDailyNewsSummaryEmail = inngest.createFunction(
+    {id: 'daily-news-summary-email'},
+    [{event: 'app/send.daily.news'}, {cron: '0 12 * * *'}],
     async ({step}) => {
-        const users = await step.run('fetch-users', async () => {
-            const mongoose = await connectToDatabase();
-            const db = mongoose.connection.db;
-            if (!db) throw new Error('Database connection failed');
-            return await db.collection('user').find({}, {projection: {email: 1}}).toArray();
+        console.log('>>> STARTING: sendDailyNewsSummary');
+
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
+            throw new Error("⛔ CRITICAL ERROR: GEMINI_API_KEY is missing from process.env!");
+        }
+
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({model: "gemini-2.0-flash"});
+
+        // Step 1: Get all users
+        const users = await step.run('get-all-users', async () => {
+            return await getAllUsersForNewsEmail();
         });
 
-        if (users.length === 0) return {message: 'No users found'};
+        if (!users || users.length === 0) {
+            console.log(">>> No users found for daily news summary.");
+            return {success: true, message: "No users found"};
+        }
 
-        const newsSummary = await step.run('generate-market-news', async () => {
-            const apiKey = process.env.GEMINI_API_KEY;
-            if (!apiKey) return "Market updates unavailable.";
-
-            const placeholderNews = `
-            1. NVIDIA (NVDA) - Stock surged 8% to $950, hitting all-time high after announcing new AI chip partnership with Microsoft. Trading volume 3x normal.
-
-            2. Bitcoin (BTC) - Stabilized at $95,000 after volatile week. Institutional buying increased 25% according to Coinbase data.
-
-            3. Federal Reserve - Chair Powell signals potential rate cuts in Q2 2026, citing cooling inflation at 2.3%. Markets rallied on the news.
-
-            4. Tesla (TSLA) - Dropped 3% after Q4 delivery numbers missed expectations by 5%. Analysts maintain buy ratings citing long-term EV growth.
-
-            5. Apple (AAPL) - Announced $100B stock buyback program. Shares up 2% in after-hours trading.
-`;
-            const prompt = NEWS_SUMMARY_EMAIL_PROMPT.replace('{{newsData}}', placeholderNews);
-
-            try {
-                const genAI = new GoogleGenerativeAI(apiKey);
-                const model = genAI.getGenerativeModel({model: "gemini-pro"});
-
-                const result = await model.generateContent(prompt);
-                return result.response.text();
-            } catch (error) {
-                console.error('Gemini News Error:', error);
-                return 'Market is looking positive today! Check your dashboard for latest updates.';
-            }
-        });
-
+        // Step 2: Process each user
         for (const user of users) {
-            await step.run(`send-news-email-${user.email}`, async () => {
-                await sendDailyNewsEmail({
-                    email: user.email,
-                    newsContent: newsSummary,
-                    date: new Date().toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })
-                });
+            await step.run(`process-news-for-user-${user.id}`, async () => {
+                try {
+                    // Get watchlist symbols for the user
+                    const symbols = await getWatchlistSymbolsByEmail(user.email);
+
+                    // Fetch news (watchlist or general fallback)
+                    const news = await getNews(symbols);
+
+                    if (!news || news.length === 0) {
+                        console.log(`>>> No news articles found for user: ${user.email}`);
+                        return;
+                    }
+
+                    // Step 3: Summarize news via AI
+                    const newsDataString = JSON.stringify(news.map(n => ({
+                        headline: n.headline,
+                        summary: n.summary,
+                        source: n.source,
+                        url: n.url,
+                        datetime: n.datetime
+                    })));
+
+                    const prompt = NEWS_SUMMARY_EMAIL_PROMPT.replace('{{newsData}}', newsDataString);
+
+                    console.log(`>>> Generating AI summary for user: ${user.email}`);
+                    const result = await model.generateContent(prompt);
+                    const newsContent = result.response.text();
+
+                    // Step 4: Send the email
+                    const todayDate = getFormattedTodayDate();
+
+                    console.log(`>>> Sending daily news email to: ${user.email}`);
+                    await sendDailyNewsEmail({
+                        email: user.email,
+                        newsContent,
+                        date: todayDate
+                    });
+                } catch (error) {
+                    console.error(`❌ Failed to process news for user ${user.email}:`, error);
+                }
             });
         }
-        return {success: true, message: `Sent to ${users.length} users`};
+
+        return {success: true};
     }
 );
