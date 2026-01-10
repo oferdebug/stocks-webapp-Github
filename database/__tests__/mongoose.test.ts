@@ -212,7 +212,9 @@ describe('database/mongoose.ts', () => {
             );
 
             consoleLogSpy.mockRestore();
-            process.env.NODE_ENV = originalNodeEnv;
+            if (originalNodeEnv) {
+                Object.defineProperty(process.env, 'NODE_ENV', {value: originalNodeEnv, writable: true});
+            }
         });
 
         it('should initialize global cache if not present', async () => {

@@ -40,10 +40,7 @@ function Layout({ children }: { children: ReactNode }) {
                             alt="NextTrade Dashboard Preview"
                             width={1200}
                             height={800}
-                            className="rounded-2xl border border-white/10 shadow-2xl
-                           transform-gpu transition-all duration-700 ease-out
-                           [rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg]
-                           hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
+                            className="rounded-2xl border border-white/10 shadow-2xl transform-gpu transition-all duration-700 ease-out [rotateX:12deg] [rotateY:-8deg] [rotateZ:1deg] hover:[rotateX:0deg] hover:[rotateY:0deg] hover:[rotateZ:0deg] hover:scale-[1.02]"
                             priority
                         />
                     </div>

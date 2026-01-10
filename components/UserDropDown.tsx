@@ -8,11 +8,12 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
-import { LogOut } from "lucide-react";
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {Button} from '@/components/ui/button';
+import {useRouter} from 'next/navigation';
+import {LogOut} from "lucide-react";
 import NavItems from "@/components/NavItems";
+import {signOutUser} from "@/lib/actions/auth.actions";
 
 interface UserDropDownProps {
     user?: {
@@ -24,7 +25,7 @@ interface UserDropDownProps {
     } | null;
 }
 
-const UserDropDown = ({ user }: UserDropDownProps) => {
+const UserDropDown = ({user}: UserDropDownProps) => {
     const router = useRouter();
 
     /* SENIOR NOTE: Calculation inside component scope */
@@ -34,7 +35,8 @@ const UserDropDown = ({ user }: UserDropDownProps) => {
         .join("")
         .toUpperCase() || "U";
 
-    const handleSignOut = () => {
+    const handleSignOut = async () => {
+        await signOutUser();
         router.push('/sign-in');
     };
 
@@ -46,7 +48,7 @@ const UserDropDown = ({ user }: UserDropDownProps) => {
                     className="flex items-center gap-3 hover:bg-transparent focus-visible:ring-0 p-0"
                 >
                     <Avatar className="h-8 w-8">
-                        <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"} />
+                        <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"}/>
                         <AvatarFallback className="bg-green-500 text-green-900 text-sm font-bold">
                             {userInitials}
                         </AvatarFallback>
@@ -58,11 +60,11 @@ const UserDropDown = ({ user }: UserDropDownProps) => {
                 className="bg-[#0d1117] border-[#30363d] text-gray-200 w-56 shadow-2xl rounded-xl"
                 align="end"
             >
-                {/* ... (Header code remains the same) ... */}
                 <DropdownMenuLabel className="p-0">
                     <div className="flex items-center gap-3 p-4">
                         <Avatar className="h-10 w-10 border border-[#30363d]">
-                            <AvatarImage src={user?.image || "https://github.com/shadcn.png"} alt={user?.name || "User"} />
+                            <AvatarImage src={user?.image || "https://github.com/shadcn.png"}
+                                         alt={user?.name || "User"}/>
                             <AvatarFallback className="bg-green-500 text-green-900 text-sm font-bold">
                                 {userInitials}
                             </AvatarFallback>
@@ -78,13 +80,13 @@ const UserDropDown = ({ user }: UserDropDownProps) => {
                     </div>
                 </DropdownMenuLabel>
 
-                <DropdownMenuSeparator className="bg-[#30363d] my-1" />
+                <DropdownMenuSeparator className="bg-[#30363d] my-1"/>
 
                 <DropdownMenuItem
                     onClick={handleSignOut}
                     className="text-gray-300 focus:text-white focus:bg-[#1f242c] cursor-pointer py-3 px-4 m-1 rounded-md"
                 >
-                    <LogOut className="h-4 w-4 mr-3" />
+                    <LogOut className="h-4 w-4 mr-3"/>
                     Log Out
                 </DropdownMenuItem>
 
@@ -95,7 +97,7 @@ const UserDropDown = ({ user }: UserDropDownProps) => {
                     'sm:gap-2' reduces the gap for the tight dropdown space.
                 */}
                 <div className="px-2 pb-2">
-                    <NavItems className="flex-col sm:flex-col items-start sm:gap-1 p-0" />
+                    <NavItems className="flex-col sm:flex-col items-start sm:gap-1 p-0"/>
                 </div>
 
             </DropdownMenuContent>

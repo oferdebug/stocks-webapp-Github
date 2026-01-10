@@ -30,7 +30,7 @@ export async function getWatchlistSymbolsByEmail(email: string): Promise<string[
         const watchlistItems = await Watchlist.find({userId});
 
         return watchlistItems.map(item => item.symbol);
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error in getWatchlistSymbolsByEmail:", error);
         return [];
     }
@@ -38,26 +38,90 @@ export async function getWatchlistSymbolsByEmail(email: string): Promise<string[
 
 
 export async function addToWatchlist(
-  symbol: string,
-  company: string,
-  email: string
+    symbol: string,
+    company: string,
+    email: string
 ) {
-  try {
-    const mongoose = await connectToDatabase();
-    const db = mongoose.connection.db;
-    if (!db) {
-      console.error("Database connection not established");
-      return false;
-    }
+    try {
+        const mongoose = await connectToDatabase();
+        const db = mongoose.connection.db;
+        if (!db) {
+            console.error("Database connection not established");
+            return {success: false, error: "Database connection failed"};
+        }
 
-    // Find the user by email in the 'user' collection (Better Auth)
-    const user = await db.collection("user").findOne({ email });
-    if (!user) {
-      console.error("User not found");
-      return false;
+        // Find the user by email in the 'user' collection (Better Auth)
+        const user = await db.collection("user").findOne({email});
+        if (!user) {
+            console.error("User not found");
+            return {success: false, error: "User not found"};
+        }
+
+        const userId = user.id || user._id.toString();
+
+        await Watchlist.create({
+            userId,
+            symbol: symbol.toUpperCase(),
+            company
+        });
+
+        return {success: true};
+    } catch (error: unknown) {
+        if (error && typeof error === 'object' && 'code' in error && error.code === 11000) {
+            return {success: true, message: "Already in watchlist"};
+        }
+        console.error("Error in addToWatchlist:", error);
+        return {success: false, error: "Failed to add to watchlist"};
     }
-  } catch (error) {
-    console.error("Error in addToWatchlist:", error);
-    return false;
-  }
+}
+
+export async function removeFromWatchlist(symbol: string, email: string) {
+    try {
+        const mongoose = await connectToDatabase();
+        const db = mongoose.connection.db;
+        if (!db) {
+            console.error("Database connection not established");
+            return {success: false, error: "Database connection failed"};
+        }
+
+        const user = await db.collection("user").findOne({email});
+        if (!user) {
+            return {success: false, error: "User not found"};
+        }
+
+        const userId = user.id || user._id.toString();
+
+        await Watchlist.deleteOne({
+            userId,
+            symbol: symbol.toUpperCase()
+        });
+
+        return {success: true};
+    } catch (error: unknown) {
+        console.error("Error in removeFromWatchlist:", error);
+        return {success: false, error: "Failed to remove from watchlist"};
+    }
+}
+
+export async function isStockInWatchlist(symbol: string, email: string): Promise<boolean> {
+    try {
+        const mongoose = await connectToDatabase();
+        const db = mongoose.connection.db;
+        if (!db) return false;
+
+        const user = await db.collection("user").findOne({email});
+        if (!user) return false;
+
+        const userId = user.id || user._id.toString();
+
+        const item = await Watchlist.findOne({
+            userId,
+            symbol: symbol.toUpperCase()
+        });
+
+        return !!item;
+    } catch (error: unknown) {
+        console.error("Error in isStockInWatchlist:", error);
+        return false;
+    }
 }

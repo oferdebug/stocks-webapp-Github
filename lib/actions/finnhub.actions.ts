@@ -27,6 +27,8 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
  */
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
     try {
+        console.log('>>> FINNHUB KEY:', NEXT_PUBLIC_FINNHUB_API_KEY?.substring(0, 10));
+
         const toDate = new Date();
         const fromDate = new Date();
         fromDate.setDate(toDate.getDate() - 5);

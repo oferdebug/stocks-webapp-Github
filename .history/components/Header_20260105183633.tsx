@@ -40,7 +40,4 @@ const Header = ({ user }: { user: User }) => {
   );
 };
 
-
-
 export default Header;
-

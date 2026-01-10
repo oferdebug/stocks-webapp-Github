@@ -1,7 +1,7 @@
 'use server';
 
 import {auth} from "@/lib/better-auth/auth";
-import {inngest} from "@/lib/inngest/client";
+import {inngest} from "@/inngest/client";
 import {headers} from "next/headers";
 
 export const signUpWithEmail = async ({
@@ -49,9 +49,10 @@ export const signUpWithEmail = async ({
 
         return {success: true, data: response};
 
-    } catch (e) {
+    } catch (e: any) {
         console.log('SignUp Failed: ', e);
-        return {success: false, error: 'Sign Up Failed. Please Try Again.'};
+        const errorMsg = e?.body?.message || e?.message || 'Sign Up Failed. Please Try Again.';
+        return {success: false, error: errorMsg};
     }
 };
 
@@ -60,9 +61,10 @@ export const signInWithEmail = async ({email, password}: SignInFormData) => {
         const response = await auth.api.signInEmail({body: {email, password}});
 
         return {success: true, data: response};
-    } catch (e) {
+    } catch (e: any) {
         console.log('SignIn Failed, please Try Again: ', e);
-        return {success: false, error: 'Sign In Failed. Please Try Again.'};
+        const errorMsg = e?.body?.message || e?.message || 'Sign In Failed. Please Try Again.';
+        return {success: false, error: errorMsg};
     }
 };
 
@@ -70,8 +72,9 @@ export const signInWithEmail = async ({email, password}: SignInFormData) => {
 export const signOutUser = async () => {
     try {
         await auth.api.signOut({headers: await headers()});
-    } catch (e) {
+    } catch (e: any) {
         console.log('SignOut Failed: ', e);
-        return {success: false, error: 'Sign Out Failed. Please Try Again.'};
+        const errorMsg = e?.body?.message || e?.message || 'Sign Out Failed. Please Try Again.';
+        return {success: false, error: errorMsg};
     }
 };

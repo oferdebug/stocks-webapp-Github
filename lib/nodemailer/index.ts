@@ -39,9 +39,9 @@ export const sendDailyNewsSummaryEmail = async ({email, newsContent, date}: {
         .replace('{{date}}', date);
 
     const mailOptions = {
-        from: `"NextTrade" <News@NextTrade.com>`,
+        from: `"NextTrade" <news@nexttrade.com>`,
         to: email,
-        subject: `Daily Market Insights - ${date}`,
+        subject: `📰 Market News Summary - ${date}`,
         text: `Here is your daily market summary from NextTrade.`,
         html: htmlTemplate,
     };

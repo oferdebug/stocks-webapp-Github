@@ -28,13 +28,20 @@ function SignIn() {
 
 
     const onSubmit = async (data: SignInFormData) => {
+        setErrorMsg(null);
         try {
             const result = await signInWithEmail(data);
-            if (result.success) router.push('/');
+            if (result.success) {
+                router.push('/');
+            } else {
+                setErrorMsg(result.error || 'Invalid email or password');
+            }
         } catch (e) {
             console.error(e);
-            toast.error('SignIn Failed,Please Try Again.', {
-                description: e instanceof Error ? e.message : 'Failed To SignIn, Please Try Again. Later',
+            const message = e instanceof Error ? e.message : 'Failed To SignIn, Please Try Again. Later';
+            setErrorMsg(message);
+            toast.error('SignIn Failed, Please Try Again.', {
+                description: message,
             })
         }
     };
@@ -49,7 +56,7 @@ function SignIn() {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" suppressHydrationWarning>
                 <InputField
                     name="email"
                     label="Email"

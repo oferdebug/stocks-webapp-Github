@@ -978,7 +978,7 @@
 
 "@google/generative-ai@^0.24.1":
   version "0.24.1"
-  resolved "https://registry.npmjs.org/@google/generative-ai/-/generative-ai-0.24.1.tgz"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.24.1.tgz#634a3c06f8ea7a6125c1b0d6c1e66bb11afb52c9"
   integrity sha512-MqO+MLfM6kjxcKoy0p1wRzG3b4ZZXtPI+z2IE26UogS2Cm/XHO+7gGRBh6gcJsOiIVoH93UwKvW4HdgiOZCy9Q==
 
 "@grpc/grpc-js@^1.7.1":
@@ -5204,7 +5204,7 @@ inherits@^2.0.3:
 
 inngest@^3.48.1:
   version "3.48.1"
-  resolved "https://registry.npmjs.org/inngest/-/inngest-3.48.1.tgz"
+  resolved "https://registry.yarnpkg.com/inngest/-/inngest-3.48.1.tgz#74c6c2320590d8790fcdbf25aabf748076baabb1"
   integrity sha512-Taz1ft9zHln/w9Skvmq7VO6UUuFnCDNvXGiz5VPWurlboWvtLrHQ9R6+Zmln8FNzvp6wlhS1FMmpW513NmB2kQ==
   dependencies:
     "@bufbuild/protobuf" "^2.2.3"

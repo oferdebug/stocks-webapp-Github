@@ -6,133 +6,153 @@ import SelectField from "@/components/forms/SelectField";
 import {INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS} from "@/lib/constants";
 import CountrySelectField from "@/components/forms/countrySelectField";
 import FooterLink from "@/components/forms/FooterLink";
-import { signUpWithEmail } from "@/lib/actions/auth.actions";
+import {signUpWithEmail} from "@/lib/actions/auth.actions";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
-
+import {useState} from "react";
 
 
 function SignUp() {
-    const router=useRouter();
-  {/* Initialize form state with validation rules and default values */}
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors, isSubmitting },
-  } = useForm<SignUpFormData>({
-    defaultValues: {
-      email: '',
-      fullName: '',
-      password: '',
-      country: 'US',
-      investmentGoals: 'Growth',
-      riskTolerance: 'Medium',
-      preferredIndustry: 'Technology'
-    },
-    mode: 'onBlur'
-  });
+    const router = useRouter();
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    {/* Initialize form state with validation rules and default values */
+    }
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: {errors, isSubmitting},
+    } = useForm<SignUpFormData>({
+        defaultValues: {
+            email: '',
+            fullName: '',
+            password: '',
+            country: 'US',
+            investmentGoals: 'Growth',
+            riskTolerance: 'Medium',
+            preferredIndustry: 'Technology'
+        },
+        mode: 'onBlur'
+    });
 
-  {/* Process form submission with error handling */}
-    const onSubmit=async (data:SignUpFormData)=>{
-      try {
-          const result=await signUpWithEmail(data);
-          if (result.success) router.push('/');
-      } catch (e) {
-          console.error(e);
-          toast.error('SignUp Failed,Please Try Again.',{
-              description:e instanceof Error ? e.message : 'Failed To Sign Up, Please Try Again. Later',
-          })
-      }
+    {/* Process form submission with error handling */
+    }
+    const onSubmit = async (data: SignUpFormData) => {
+        setErrorMsg(null);
+        try {
+            const result = await signUpWithEmail(data);
+            if (result.success) {
+                router.push('/');
+            } else {
+                setErrorMsg(result.error || 'Failed to create account');
+            }
+        } catch (e) {
+            console.error(e);
+            const message = e instanceof Error ? e.message : 'Failed To Sign Up, Please Try Again. Later';
+            setErrorMsg(message);
+            toast.error('SignUp Failed, Please Try Again.', {
+                description: message,
+            })
+        }
     }
 
-  return (
-      <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6"
-          suppressHydrationWarning
-      >
-          <InputField
-              name="fullName"
-          label="Full Name"
-          placeholder="Sarah Mitchell"
-          register={register}
-          error={errors.fullName}
-          validation={{ required: 'Full Name Is Required', minLength: 2 }}
-        />
-        <InputField
-          name="email"
-          label="Email"
-          placeholder="contact@NextTrade.com"
-          register={register}
-          error={errors.email}
-          validation={{ required: 'Full Email Is Required', minLength: 2 }}
-        />
-        <InputField
-          name="password"
-          label="Password"
-          placeholder="Enter A Strong Password"
-          register={register}
-          type="password"
-          error={errors.password}
-          validation={{ required: 'Password Is Required', minLength: 8 }}
-        />
+    return (
+        <div className="relative overflow-hidden">
+            <h1 className="form-title">Join NextTrade & Start Your Journey!</h1>
 
-        {/* Geographic location selection */}
-        <CountrySelectField
-          name="country"
-          label="Country"
-          control={control}
-          error={errors.country}
-          required
-          placeholder=""
-        />
+            {errorMsg && (
+                <div
+                    className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-md mb-4 text-sm text-center">
+                    {errorMsg}
+                </div>
+            )}
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-6"
+                suppressHydrationWarning
+            >
+                <InputField
+                    name="fullName"
+                    label="Full Name"
+                    placeholder="Sarah Mitchell"
+                    register={register}
+                    error={errors.fullName}
+                    validation={{required: 'Full Name Is Required', minLength: 2}}
+                />
+                <InputField
+                    name="email"
+                    label="Email"
+                    placeholder="contact@NextTrade.com"
+                    register={register}
+                    error={errors.email}
+                    validation={{required: 'Full Email Is Required', minLength: 2}}
+                />
+                <InputField
+                    name="password"
+                    label="Password"
+                    placeholder="Enter A Strong Password"
+                    register={register}
+                    type="password"
+                    error={errors.password}
+                    validation={{required: 'Password Is Required', minLength: 8}}
+                />
 
-        {/* Investment profile customization */}
-        <SelectField
-          name="investmentGoals"
-          label="Investment Goals"
-          placeholder="Select Your Investment Goals"
-          options={INVESTMENT_GOALS}
-          control={control}
-          error={errors.investmentGoals}
-          required
-        />
-        <SelectField
-          name="preferredIndustry"
-          label="Preferred Industry"
-          placeholder="Select Your Preferred Industry"
-          options={PREFERRED_INDUSTRIES}
-          control={control}
-          error={errors.preferredIndustry}
-          required
-        />
-        <SelectField
-          name="riskTolerance"
-          label="Risk Tolerance"
-          placeholder="Select Your Risk Level"
-          options={RISK_TOLERANCE_OPTIONS}
-          control={control}
-          error={errors.riskTolerance}
-          required
-        />
+                {/* Geographic location selection */}
+                <CountrySelectField
+                    name="country"
+                    label="Country"
+                    control={control}
+                    error={errors.country}
+                    required
+                    placeholder=""
+                />
 
-        {/* Form submission with async state management */}
-        <Button 
-          type="submit" 
-          disabled={isSubmitting} 
-          className="green-btn w-full mt-5"
-        >
-          {isSubmitting ? 'Creating Account' : 'Start Your Investing Journey Today'}
-        </Button>
+                {/* Investment profile customization */}
+                <SelectField
+                    name="investmentGoals"
+                    label="Investment Goals"
+                    placeholder="Select Your Investment Goals"
+                    options={INVESTMENT_GOALS}
+                    control={control}
+                    error={errors.investmentGoals}
+                    required
+                />
+                <SelectField
+                    name="preferredIndustry"
+                    label="Preferred Industry"
+                    placeholder="Select Your Preferred Industry"
+                    options={PREFERRED_INDUSTRIES}
+                    control={control}
+                    error={errors.preferredIndustry}
+                    required
+                />
+                <SelectField
+                    name="riskTolerance"
+                    label="Risk Tolerance"
+                    placeholder="Select Your Risk Level"
+                    options={RISK_TOLERANCE_OPTIONS}
+                    control={control}
+                    error={errors.riskTolerance}
+                    required
+                />
 
-        <FooterLink 
-          text="Already Have An Account?" 
-          linkText="SignIn" 
-          href="/sign-in" 
-        />
-      </form>
-  );
+                {/* Form submission with async state management */}
+                <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="green-btn w-full mt-5"
+                >
+                    {isSubmitting ? 'Creating Account' : 'Start Your Investing Journey Today'}
+                </Button>
+
+                <FooterLink
+                    text="Already Have An Account?"
+                    linkText="SignIn"
+                    href="/sign-in"
+                />
+            </form>
+        </div>
+    );
 }
 
 export default SignUp;

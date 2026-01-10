@@ -1,4 +1,5 @@
 'use server';
+
 import {connectToDatabase} from "@/database/mongoose";
 
 export const getAllUsersForNewsEmail = async () => {
@@ -19,7 +20,6 @@ export const getAllUsersForNewsEmail = async () => {
         }))
     } catch (e) {
         console.error('Error fetching users for news email:', e);
-        return [];
+        return []
     }
-    // Simulated database call to fetch all users
 }
