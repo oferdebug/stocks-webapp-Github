@@ -2,11 +2,13 @@
   <dictionary name="project">
     <words>
       <w>Lerance</w>
+      <w>aapl</w>
       <w>finnhub</w>
       <w>inngest</w>
       <w>shadcn</w>
       <w>tradeiq</w>
       <w>tradingview</w>
+      <w>tsla</w>
     </words>
   </dictionary>
 </component>

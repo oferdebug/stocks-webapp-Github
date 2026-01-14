@@ -112,9 +112,7 @@
     --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-/* === CUSTOM COLOR THEME === */
 @theme {
-    /* Extended Gray Scale */
     --color-gray-900: #050505;
     --color-gray-800: #141414;
     --color-gray-700: #212328;
@@ -122,7 +120,6 @@
     --color-gray-500: #9095A1;
     --color-gray-400: #CCDADC;
 
-    /* Vibrant Colors */
     --color-blue-600: #5862FF;
     --color-yellow-400: #FDD458;
     --color-yellow-500: #E8BA40;
@@ -204,15 +201,15 @@
     }
 
     .form-input {
-        @apply h-12 px-3 py-3 text-white text-base placeholder:text-gray-500 border-gray-600 bg-gray-800 rounded-lg focus:!border-yellow-500 focus:ring-0;
+        @apply h-12 px-3 py-3 text-white text-base placeholder:text-gray-500 border-gray-600 bg-gray-800 rounded-lg focus:!border-green-500 focus:ring-0;
     }
 
     .select-trigger {
-        @apply w-full !h-12 px-3 py-3 text-base border-gray-600 bg-gray-800 text-white rounded-lg focus:!border-yellow-500 focus:ring-0;
+        @apply w-full !h-12 px-3 py-3 text-base border-gray-600 bg-gray-800 text-white rounded-lg focus:!border-green-500 focus:ring-0;
     }
 
     .country-select-trigger {
-        @apply h-12 px-3 py-3 text-base w-full justify-between font-normal border-gray-600 bg-gray-800 text-gray-400 rounded-lg focus:!border-yellow-500 focus:ring-0;
+        @apply h-12 px-3 py-3 text-base w-full justify-between font-normal border-gray-600 bg-gray-800 text-gray-400 rounded-lg focus:!border-green-500 focus:ring-0;
     }
 
     .country-select-input {
@@ -228,15 +225,15 @@
     }
 
     .footer-link {
-        @apply text-gray-400 font-medium hover:text-yellow-400 hover:underline transition-colors;
+        @apply text-gray-400 font-medium hover:text-green-400 hover:underline transition-colors;
     }
 
     .search-text {
-        @apply cursor-pointer hover:text-yellow-500;
+        @apply cursor-pointer hover:text-green-500;
     }
 
     .search-btn {
-        @apply cursor-pointer px-4 py-2 w-fit flex items-center gap-2 text-sm md:text-base bg-yellow-500 hover:bg-yellow-500 text-black font-medium rounded;
+        @apply cursor-pointer px-0 w-fit inline-flex items-center gap-2 text-sm md:text-base hover:text-green-500 text-gray-400 font-medium rounded transition-colors;
     }
 
     .search-dialog {
@@ -292,7 +289,7 @@
     }
 
     .watchlist-btn {
-        @apply bg-yellow-500 text-base hover:bg-yellow-500 text-gray-900 w-full rounded h-11 font-semibold cursor-pointer;
+        @apply bg-green-500 text-base hover:bg-green-600 text-gray-900 w-full rounded h-11 font-semibold cursor-pointer;
     }
 
     .watchlist-remove {
@@ -332,11 +329,11 @@
     }
 
     .watchlist-icon-btn {
-        @apply w-fit cursor-pointer hover:bg-transparent! text-gray-400 hover:text-yellow-500;
+        @apply w-fit cursor-pointer hover:bg-transparent! text-gray-400 hover:text-green-500;
     }
 
     .watchlist-icon-added {
-        @apply !text-yellow-500 hover:!text-yellow-600;
+        @apply !text-green-500 hover:!text-green-600;
     }
 
     .watchlist-icon {
@@ -376,7 +373,7 @@
     }
 
     .add-alert {
-        @apply flex text-sm items-center whitespace-nowrap gap-1.5 px-3 w-fit py-2 text-yellow-600 border border-yellow-600/20 rounded font-medium bg-transparent hover:bg-transparent cursor-pointer transition-colors;
+        @apply flex text-sm items-center whitespace-nowrap gap-1.5 px-3 w-fit py-2 text-green-500 border border-green-500/20 rounded font-medium bg-transparent hover:bg-transparent cursor-pointer transition-colors;
     }
 
     .watchlist-news {
@@ -404,7 +401,7 @@
     }
 
     .news-cta {
-        @apply text-sm align-bottom text-yellow-500 hover:text-gray-400;
+        @apply text-sm align-bottom text-green-500 hover:text-gray-400;
     }
 
     .alert-dialog {
@@ -428,7 +425,7 @@
     }
 
     .alert-name {
-        @apply mb-2 text-lg text-yellow-500 font-semibold;
+        @apply mb-2 text-lg text-green-500 font-semibold;
     }
 
     .alert-details {
@@ -456,7 +453,6 @@
     }
 }
 
-/* Market News Component Styles */
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -466,7 +462,6 @@
     display: none;
 }
 
-/* TradingView Advanced Chart Widget Styles */
 .tradingview-widget-container {
     position: relative;
     background-color: #141414 !important;
@@ -539,7 +534,6 @@
     overflow: hidden !important;
 }
 
-/* Custom scrollbar that shows on hover */
 .scrollbar-hide-default {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
@@ -571,7 +565,6 @@
     background-color: #9095A1;
 }
 
-/* Dashboard Preview Hero Image Styles */
 .dashboard-preview-container {
     perspective: 1500px;
     width: 100%;

@@ -1,6 +1,8 @@
 'use server';
 
+import {cache} from 'react';
 import {formatArticle, validateArticle} from "@/lib/utils";
+import {POPULAR_STOCK_SYMBOLS} from "@/lib/constants";
 
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;
@@ -96,3 +98,66 @@ export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> 
         throw new Error("Failed to fetch news");
     }
 }
+
+/**
+ * Searches for stocks using Finnhub API.
+ * If no query is provided, returns top 10 popular stocks.
+ * If a query is provided, searches for matching stocks.
+ */
+export const searchStocks = cache(async (query?: string): Promise<StockWithWatchlistStatus[]> => {
+    try {
+        let results: FinnhubSearchResult[] = [];
+
+        if (!query || !query.trim()) {
+            // Fetch top 10 popular symbols
+            const topSymbols = POPULAR_STOCK_SYMBOLS.slice(0, 10);
+            const profilePromises = topSymbols.map(async (symbol) => {
+                try {
+                    const url = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${symbol}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`;
+                    const profile = await fetchJSON<{ name?: string; exchange?: string }>(url, 3600);
+                    
+                    return {
+                        symbol: symbol,
+                        description: profile.name || symbol,
+                        displaySymbol: symbol,
+                        type: 'Common Stock',
+                        exchange: profile.exchange || 'US',
+                    } as FinnhubSearchResult;
+                } catch (err) {
+                    // If profile fetch fails, return a basic result
+                    return {
+                        symbol: symbol,
+                        description: symbol,
+                        displaySymbol: symbol,
+                        type: 'Common Stock',
+                        exchange: 'US',
+                    } as FinnhubSearchResult;
+                }
+            });
+
+            results = await Promise.all(profilePromises);
+        } else {
+            // Search for stocks matching the query
+            const trimmedQuery = query.trim();
+            const url = `${FINNHUB_BASE_URL}/search?q=${encodeURIComponent(trimmedQuery)}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`;
+            const searchResponse = await fetchJSON<FinnhubSearchResponse>(url, 1800);
+            results = searchResponse.result || [];
+        }
+
+        // Map results to StockWithWatchlistStatus
+        const mappedResults: StockWithWatchlistStatus[] = results
+            .slice(0, 15) // Limit to 15 items
+            .map((result) => ({
+                symbol: result.symbol.toUpperCase(),
+                name: result.description,
+                exchange: result.displaySymbol || 'US',
+                type: result.type || 'Stock',
+                isInWatchlist: false,
+            }));
+
+        return mappedResults;
+    } catch (error) {
+        console.error('Error in stock search:', error);
+        return [];
+    }
+});

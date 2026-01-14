@@ -5,6 +5,10 @@ import React from "react";
 import {Toaster} from "@/components/ui/sonner";
 import Header from "@/components/Header";
 
+import {auth} from "@/lib/better-auth/auth";
+import {headers} from "next/headers";
+import {SearchCommand} from "@/components/SearchCommand";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -21,7 +25,11 @@ export const metadata: Metadata = {
         "The ultimate data-driven trading ecosystem. NextTrade transforms complex market variables into actionable insights, helping you execute trades with precision and confidence.",
 };
 
-const Layout = async ({children, session}: { children: React.ReactNode, session: any }) => {
+const Layout = async ({children}: { children: React.ReactNode }) => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
     const user = session?.user ? {
         ...session.user,
         image: session.user.image || null,
@@ -30,13 +38,15 @@ const Layout = async ({children, session}: { children: React.ReactNode, session:
     return (
         <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
         <body className="antialiased bg-gray-900">
-        <main className="min-h-screen text-gray-200">
+        <main className="min-h-screen text-gray-200"> ּ
             {/* Cast to User to satisfy the prop requirement */}
             <Header user={user as User}/>
             <div className={"container py-10 home-wrapper mx-auto"}>{children}</div>
+            <SearchCommand/>
         </main>
         </body>
         </html>
     );
 };
 export default Layout;
+
