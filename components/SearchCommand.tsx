@@ -23,6 +23,17 @@ interface SearchCommandProps {
     className?: string
 }
 
+/**
+ * Render a searchable command-style dialog for finding and selecting stocks.
+ *
+ * Presents a trigger (button or text), an input with debounced search against `searchStocks`, and a list of results or popular stocks. Selecting a result navigates to the stock page and closes the dialog.
+ *
+ * @param renderAs - Either `'button'` to render the trigger as inline text or `'text'` to render it as a button element.
+ * @param label - The label displayed on the trigger.
+ * @param initialStocks - Initial list of stocks to show when no search term is entered; each item may include watchlist status.
+ * @param className - Optional additional CSS classes applied to the trigger element.
+ * @returns A React element rendering the search trigger and the command dialog UI for stock lookup and selection.
+ */
 export function SearchCommand({
                                   renderAs = 'button',
                                   label = 'Search Stocks',
