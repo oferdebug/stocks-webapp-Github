@@ -93,7 +93,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
 
         // Step 2: Fetch news for each user
         const results = await step.run('fetch-user-news', async () => {
-            const perUser: Array<{ email: string, user: User, articles: MarketNewsArticle[] }> = [];
+            const perUser: any[] = [];
             for (const user of users) {
                 try {
                     const symbols = await getWatchlistSymbolsByEmail(user.email);
@@ -126,7 +126,7 @@ export const sendDailyNewsSummary = inngest.createFunction(
         const model = genAI.getGenerativeModel({model: "gemini-flash-latest"});
 
 
-        const userNewsSummary: { user: User; newsContent: string }[] = [];
+        const userNewsSummary: any[] = [];
 
         for (const {user, articles} of results) {
             if (!articles || articles.length === 0) {
