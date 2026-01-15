@@ -23,7 +23,7 @@ function Layout({children}: { children: ReactNode }) {
         <main className="auth-layout">
             <section className="auth-left-section scrollbar-hide-default relative">
                 <div
-                    className="absolute top-0 left-0 right-0 flex justify-between items-center w-full px-6 lg:px-12 py-8 lg:py-12 z-20">
+                    className="absolute top-0 left-0 right-0 flex justify-between items-center w-full py-8 lg:py-12 z-20">
                     <Link href="/" className="auth-logo">
                         <Image
                             src="/assets/icons/logo1-nexttrade-dark (1).svg"
