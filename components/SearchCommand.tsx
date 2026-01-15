@@ -143,8 +143,8 @@ export function SearchCommand({
                                                 {stock.symbol}|{stock.exchange}|{stock.type}
                                             </div>
                                         </div>
-                                        {/* Star To Implement Later */}
-                                        <Star/>
+                                        <Star
+                                            className={cn("h-4 w-4", stock.isInWatchlist ? "fill-yellow-500 text-yellow-500" : "text-gray-400")}/>
                                     </Link>
                                 </li>
                             ))}
