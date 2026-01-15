@@ -173,7 +173,7 @@
     }
 
     .auth-left-section {
-        @apply w-full lg:w-[45%] lg:h-screen px-6 lg:px-12 flex flex-col lg:overflow-y-auto;
+        @apply w-full lg:w-[45%] lg:h-screen px-6 lg:px-12 flex flex-col;
     }
 
     .auth-right-section {
