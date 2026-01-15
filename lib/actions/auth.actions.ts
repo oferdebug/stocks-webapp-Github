@@ -15,12 +15,6 @@ export const signUpWithEmail = async ({
                                       }: SignUpFormData) => {
 
 
-    console.log('----------------------------------------------------');
-    console.log('DEBUG: Attempting to register email:', email);
-    // Be careful not to expose the password in logs, just the connection string
-    console.log('DEBUG: Active Database URL:', process.env.DATABASE_URL);
-    console.log('----------------------------------------------------');
-
     // Keeping your logic structure
     try {
         const response = await auth.api.signUpEmail({

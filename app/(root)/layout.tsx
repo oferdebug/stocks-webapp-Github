@@ -12,10 +12,18 @@ const Layout = async ({children}: { children: React.ReactNode }) => {
 
     if (!session?.user) redirect('/sign-in')
 
+    const user = session?.user ? {
+        ...session.user,
+        image: session.user.image || null,
+    } : null;
+
     return (
-        <>
-            {children}
-        </>
+        <main className="min-h-screen">
+            <Header user={user as User}/>
+            <div className={"container py-10 home-wrapper mx-auto"}>
+                {children}
+            </div>
+        </main>
     );
 }
 

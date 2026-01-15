@@ -169,7 +169,7 @@
     }
 
     .auth-logo {
-        @apply pt-6 lg:pt-8 mb-4 lg:mb-6;
+        @apply w-auto h-auto;
     }
 
     .auth-left-section {

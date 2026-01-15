@@ -5,19 +5,6 @@ import NavItems from '@/components/NavItems';
 import UserDropDown from '@/components/UserDropDown';
 import {searchStocks} from "@/lib/actions/finnhub.actions";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface HeaderProps {
-    user: {
-        id?: string;
-        name?: string;
-        email?: string;
-        image?: string | null;
-        [key: string]: unknown;
-    } | null;
-}
-
-// This Is Test
-
 const Header = async ({user}: { user: User }) => {
     const initialStocks = await searchStocks('');
     return (
