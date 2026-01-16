@@ -31,19 +31,40 @@ export function InlineSearch({
                                  className,
                              }: InlineSearchProps) {
     const [searchTerm, setSearchTerm] = React.useState("")
-    const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(!initialStocks || initialStocks.length === 0)
     const [stocks, setStocks] = React.useState<StockWithWatchlistStatus[]>(initialStocks);
     const latestRequestIdRef = React.useRef(0);
 
     const isSearchMode = !!searchTerm.trim();
     const displayStocks = isSearchMode ? stocks : (stocks?.length > 0 ? stocks : initialStocks);
 
-    const handleSearch = async () => {
+    const handleSearch = React.useCallback(async () => {
         const requestId = ++latestRequestIdRef.current;
 
-        if (!isSearchMode) {
-            setStocks(initialStocks);
-            setLoading(false);
+        if (!searchTerm.trim()) {
+            if (initialStocks && initialStocks.length > 0) {
+                setStocks(initialStocks);
+                setLoading(false);
+                return;
+            }
+
+            // If no initial stocks, fetch popular stocks
+            setLoading(true);
+            try {
+                const results = await searchStocks("");
+                if (requestId === latestRequestIdRef.current) {
+                    setStocks(results);
+                }
+            } catch (error) {
+                console.error("Initial search failed:", error);
+                if (requestId === latestRequestIdRef.current) {
+                    setStocks([]);
+                }
+            } finally {
+                if (requestId === latestRequestIdRef.current) {
+                    setLoading(false);
+                }
+            }
             return;
         }
 
@@ -63,13 +84,17 @@ export function InlineSearch({
                 setLoading(false);
             }
         }
-    }
+    }, [searchTerm, initialStocks])
 
     const debouncedSearch = useDebounce(handleSearch, 300);
 
     useEffect(() => {
-        debouncedSearch();
-    }, [searchTerm, debouncedSearch]);
+        if (!searchTerm.trim()) {
+            handleSearch();
+        } else {
+            debouncedSearch();
+        }
+    }, [searchTerm, handleSearch, debouncedSearch]);
 
     return (
         <div className={cn("flex flex-col gap-6 w-full", className)}>

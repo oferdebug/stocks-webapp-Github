@@ -43,8 +43,9 @@ export function SearchCommand({
                               }: SearchCommandProps) {
     const [open, setOpen] = React.useState(false)
     const [searchTerm, setSearchTerm] = React.useState("")
-    const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(!initialStocks || initialStocks.length === 0)
     const [stocks, setStocks] = React.useState<StockWithWatchlistStatus[]>(initialStocks);
+    const latestRequestIdRef = React.useRef(0);
 
     const isSearchMode = !!searchTerm.trim();
     const displayStocks = isSearchMode ? stocks : stocks?.slice(0, 15);
@@ -60,25 +61,61 @@ export function SearchCommand({
         return () => document.removeEventListener("keydown", down)
     }, [])
 
-    const handleSearch = async () => {
-        if (!isSearchMode) return setStocks(initialStocks);
+    const handleSearch = React.useCallback(async () => {
+        const requestId = ++latestRequestIdRef.current;
+
+        if (!searchTerm.trim()) {
+            if (initialStocks && initialStocks.length > 0) {
+                setStocks(initialStocks);
+                setLoading(false);
+                return;
+            }
+
+            // If no initial stocks, fetch popular stocks
+            setLoading(true);
+            try {
+                const results = await searchStocks("");
+                if (requestId === latestRequestIdRef.current) {
+                    setStocks(results);
+                }
+            } catch {
+                if (requestId === latestRequestIdRef.current) {
+                    setStocks([]);
+                }
+            } finally {
+                if (requestId === latestRequestIdRef.current) {
+                    setLoading(false);
+                }
+            }
+            return;
+        }
 
         setLoading(true);
         try {
             const results = await searchStocks(searchTerm.trim());
-            setStocks(results);
+            if (requestId === latestRequestIdRef.current) {
+                setStocks(results);
+            }
         } catch {
-            setStocks([]);
+            if (requestId === latestRequestIdRef.current) {
+                setStocks([]);
+            }
         } finally {
-            setLoading(false);
+            if (requestId === latestRequestIdRef.current) {
+                setLoading(false);
+            }
         }
-    }
+    }, [searchTerm, initialStocks])
 
     const debouncedSearch = useDebounce(handleSearch, 300);
 
     useEffect(() => {
-        debouncedSearch();
-    }, [searchTerm, debouncedSearch]);
+        if (!searchTerm.trim()) {
+            handleSearch();
+        } else {
+            debouncedSearch();
+        }
+    }, [searchTerm, handleSearch, debouncedSearch]);
 
 
     const handleSelectStock = () => {
