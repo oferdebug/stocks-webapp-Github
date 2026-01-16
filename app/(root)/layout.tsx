@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import {auth} from "@/lib/better-auth/auth";
 import {headers} from "next/headers";
 import {redirect} from "next/navigation";
+import {GlobalSearchCommand} from "@/components/GlobalSearchCommand";
 
 
 const Layout = async ({children}: { children: React.ReactNode }) => {
@@ -20,6 +21,7 @@ const Layout = async ({children}: { children: React.ReactNode }) => {
     return (
         <main className="min-h-screen">
             <Header user={user as User}/>
+            <GlobalSearchCommand />
             <div className={"container py-10 home-wrapper mx-auto"}>
                 {children}
             </div>
