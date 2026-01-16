@@ -5,7 +5,7 @@ import Watchlist from "@/database/models/watchlist.model";
 import {getQuote} from "@/lib/actions/finnhub.actions";
 import {sendWatchlistSummaryEmail} from "@/lib/nodemailer";
 import {GoogleGenerativeAI} from "@google/generative-ai";
-import {getFormattedTodayDate} from "@/lib/utils";
+import {getFormattedTodayDate, escapeHtml} from "@/lib/utils";
 
 const WATCHLIST_SUMMARY_AI_PROMPT = `
 You are a financial analyst at NextTrade. 
@@ -73,8 +73,8 @@ export const watchlistSummaryEmail = inngest.createFunction(
 
                 const stocksTable = stockData.map(s => `
                     <tr style="border-bottom: 1px solid #30333A;">
-                        <td style="padding: 10px 5px; color: #ffffff; font-weight: bold;">${s.symbol}</td>
-                        <td style="padding: 10px 5px; color: #9ca3af;">${s.companyName}</td>
+                        <td style="padding: 10px 5px; color: #ffffff; font-weight: bold;">${escapeHtml(s.symbol)}</td>
+                        <td style="padding: 10px 5px; color: #9ca3af;">${escapeHtml(s.companyName)}</td>
                         <td align="right" style="padding: 10px 5px; color: #ffffff;">$${s.price.toFixed(2)}</td>
                         <td align="right" style="padding: 10px 5px; color: ${s.changePercent >= 0 ? '#10b981' : '#ef4444'};">
                             ${s.changePercent >= 0 ? '+' : ''}${s.changePercent.toFixed(2)}%
@@ -88,9 +88,9 @@ export const watchlistSummaryEmail = inngest.createFunction(
                     date: getFormattedTodayDate(),
                     totalStocks: stockData.length,
                     stocksTable,
-                    topGainerSymbol: topGainer.symbol,
+                    topGainerSymbol: escapeHtml(topGainer.symbol),
                     topGainerChange: topGainer.changePercent.toFixed(2),
-                    topLoserSymbol: topLoser.symbol,
+                    topLoserSymbol: escapeHtml(topLoser.symbol),
                     topLoserChange: topLoser.changePercent.toFixed(2),
                     aiSummary: aiSummary || undefined
                 });
@@ -125,8 +125,8 @@ export const watchlistWeeklySummary = inngest.createFunction(
 
                 const stocksTable = stockData.map(s => `
                     <tr style="border-bottom: 1px solid #30333A;">
-                        <td style="padding: 10px 5px; color: #ffffff; font-weight: bold;">${s.symbol}</td>
-                        <td style="padding: 10px 5px; color: #9ca3af;">${s.companyName}</td>
+                        <td style="padding: 10px 5px; color: #ffffff; font-weight: bold;">${escapeHtml(s.symbol)}</td>
+                        <td style="padding: 10px 5px; color: #9ca3af;">${escapeHtml(s.companyName)}</td>
                         <td align="right" style="padding: 10px 5px; color: #ffffff;">$${s.price.toFixed(2)}</td>
                         <td align="right" style="padding: 10px 5px; color: ${s.changePercent >= 0 ? '#10b981' : '#ef4444'};">
                             ${s.changePercent >= 0 ? '+' : ''}${s.changePercent.toFixed(2)}%
@@ -140,9 +140,9 @@ export const watchlistWeeklySummary = inngest.createFunction(
                     date: getFormattedTodayDate(),
                     totalStocks: stockData.length,
                     stocksTable,
-                    topGainerSymbol: topGainer.symbol,
+                    topGainerSymbol: escapeHtml(topGainer.symbol),
                     topGainerChange: topGainer.changePercent.toFixed(2),
-                    topLoserSymbol: topLoser.symbol,
+                    topLoserSymbol: escapeHtml(topLoser.symbol),
                     topLoserChange: topLoser.changePercent.toFixed(2),
                     aiSummary: aiSummary || undefined
                 });

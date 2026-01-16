@@ -137,3 +137,18 @@ export const getFormattedTodayDate = () => new Date().toLocaleDateString('en-US'
     day: 'numeric',
     timeZone: 'UTC',
 });
+
+/**
+ * Escapes HTML special characters to prevent XSS attacks in email templates
+ * @param str - The string to escape
+ * @returns The escaped string safe for HTML insertion
+ */
+export const escapeHtml = (str: string | undefined | null): string => {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+};
