@@ -28,9 +28,9 @@ function Layout({children}: { children: ReactNode }) {
                         <Image
                             src="/assets/icons/logo1-nexttrade-dark (1).svg"
                             alt="NextTrade Logo"
-                            width={300}
-                            height={80}
-                            className="h-16 lg:h-24 w-auto"
+                            width={140}
+                            height={40}
+                            className="h-10 lg:h-12 w-auto"
                             priority
                         />
                     </Link>
@@ -56,9 +56,9 @@ function Layout({children}: { children: ReactNode }) {
                 </div>
             </section>
 
-            <section className="auth-right-section flex flex-col justify-center px-10">
-                <div className='z-10 relative lg:mt-4 lg:mb-8'>
-                    <div className={'grid grid-cols-[minmax(0,1fr)_auto] items-end w-full'}>
+            <section className="auth-right-section flex flex-col justify-center items-center px-10">
+                <div className='z-10 relative lg:mt-4 lg:mb-8 max-w-[850px] w-full'>
+                    <div className={'flex flex-col items-center text-center w-full'}>
                         <TestimonialRotator intervalMs={7000}/>
                     </div>
                 </div>
