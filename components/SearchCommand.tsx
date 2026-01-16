@@ -24,6 +24,8 @@ interface SearchCommandProps {
     className?: string
 }
 
+const DEFAULT_INITIAL_STOCKS: StockWithWatchlistStatus[] = [];
+
 /**
  * Render a searchable command-style dialog for finding and selecting stocks.
  *
@@ -38,7 +40,7 @@ interface SearchCommandProps {
 export function SearchCommand({
                                   renderAs = 'button',
                                   label = 'Search Stocks',
-                                  initialStocks = [],
+                                  initialStocks = DEFAULT_INITIAL_STOCKS,
                                   className,
                               }: SearchCommandProps) {
     const [open, setOpen] = React.useState(false)
@@ -48,7 +50,7 @@ export function SearchCommand({
     const latestRequestIdRef = React.useRef(0);
 
     const isSearchMode = !!searchTerm.trim();
-    const displayStocks = isSearchMode ? stocks : stocks?.slice(0, 15);
+    const displayStocks = stocks?.slice(0, 10);
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {

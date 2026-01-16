@@ -37,8 +37,6 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
  */
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
     try {
-        console.log('>>> FINNHUB KEY:', NEXT_PUBLIC_FINNHUB_API_KEY?.substring(0, 10));
-
         const toDate = new Date();
         const fromDate = new Date();
         fromDate.setDate(toDate.getDate() - 5);
@@ -122,6 +120,7 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
             const profilePromises = topSymbols.map(async (symbol) => {
                 try {
                     const url = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${symbol}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`;
+                    // Use a shorter cache for profiles during active development/testing if needed, but 1 hour is fine
                     const profile = await fetchJSON<{ name?: string; exchange?: string }>(url, 3600);
 
                     return {
@@ -132,7 +131,6 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
                         exchange: profile.exchange || 'US',
                     } as FinnhubSearchResult;
                 } catch (err) {
-                    // If profile fetch fails, return a basic result
                     console.error(`Failed to fetch profile for symbol ${symbol}:`, err);
                     return {
                         symbol: symbol,
@@ -150,7 +148,8 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
             const trimmedQuery = query.trim();
             const url = `${FINNHUB_BASE_URL}/search?q=${encodeURIComponent(trimmedQuery)}&token=${NEXT_PUBLIC_FINNHUB_API_KEY}`;
             const searchResponse = await fetchJSON<FinnhubSearchResponse>(url, 1800);
-            results = searchResponse.result || [];
+            // Limit to 10 items immediately to reduce downstream processing
+            results = (searchResponse.result || []).slice(0, 10);
         }
 
         // Map results to StockWithWatchlistStatus
@@ -159,22 +158,21 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
 
         if (session?.user) {
             await connectToDatabase();
-            const items = await Watchlist.find({userId: session.user.id}, {symbol: 1});
-            watchlistSymbols = new Set(items.map(i => i.symbol.toUpperCase()));
+            // Optimization: Only fetch what we need
+            const items = await Watchlist.find({userId: session.user.id}, {symbol: 1}).lean();
+            watchlistSymbols = new Set(items.map((i: any) => i.symbol.toUpperCase()));
         }
 
-        const mappedResults: StockWithWatchlistStatus[] = results
-            .slice(0, 15) // Limit to 15 items
-            .map((result) => {
-                const symbol = result.symbol.toUpperCase();
-                return {
-                    symbol,
-                    name: result.description,
-                    exchange: result.exchange || 'US',
-                    type: result.type || 'Stock',
-                    isInWatchlist: watchlistSymbols.has(symbol),
-                };
-            });
+        const mappedResults: StockWithWatchlistStatus[] = results.map((result) => {
+            const symbol = result.symbol.toUpperCase();
+            return {
+                symbol,
+                name: result.description,
+                exchange: result.exchange || 'US',
+                type: result.type || 'Stock',
+                isInWatchlist: watchlistSymbols.has(symbol),
+            };
+        });
 
         return mappedResults;
     } catch (error) {

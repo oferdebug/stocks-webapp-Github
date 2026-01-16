@@ -22,12 +22,14 @@ interface InlineSearchProps {
     className?: string
 }
 
+const DEFAULT_INITIAL_STOCKS: StockWithWatchlistStatus[] = [];
+
 /**
  * An inline search component for the Search page.
  * Displays a search input and a list of stocks (initial or search results).
  */
 export function InlineSearch({
-                                 initialStocks = [],
+                                 initialStocks = DEFAULT_INITIAL_STOCKS,
                                  className,
                              }: InlineSearchProps) {
     const [searchTerm, setSearchTerm] = React.useState("")
@@ -36,7 +38,7 @@ export function InlineSearch({
     const latestRequestIdRef = React.useRef(0);
 
     const isSearchMode = !!searchTerm.trim();
-    const displayStocks = isSearchMode ? stocks : (stocks?.length > 0 ? stocks : initialStocks);
+    const displayStocks = (isSearchMode ? stocks : (stocks?.length > 0 ? stocks : initialStocks))?.slice(0, 10);
 
     const handleSearch = React.useCallback(async () => {
         const requestId = ++latestRequestIdRef.current;
