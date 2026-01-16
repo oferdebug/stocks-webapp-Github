@@ -4,6 +4,9 @@ import {TOP_STORIES_WIDGET_CONFIG} from "@/lib/constants";
 const scriptUrl = `https://s3.tradingview.com/external-embedding/embed-widget-`
 
 export default function NewsPage() {
+    const WIDGET_HEIGHT = 800;
+    const SIDE_WIDGET_HEIGHT = WIDGET_HEIGHT / 2;
+
     return (
         <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
@@ -19,10 +22,10 @@ export default function NewsPage() {
                         scriptUrl={`${scriptUrl}timeline.js`}
                         config={{
                             ...TOP_STORIES_WIDGET_CONFIG,
-                            height: 800,
+                            height: WIDGET_HEIGHT,
                         }}
                         className="custom-chart"
-                        height={800}
+                        height={WIDGET_HEIGHT}
                     />
                 </div>
 
@@ -34,13 +37,13 @@ export default function NewsPage() {
                             colorTheme: "dark",
                             isTransparent: true,
                             width: "100%",
-                            height: 400,
+                            height: SIDE_WIDGET_HEIGHT,
                             locale: "en",
                             importanceFilter: "-1,0,1",
                             currencyFilter: "USD,EUR,GBP"
                         }}
                         className="custom-chart"
-                        height={400}
+                        height={SIDE_WIDGET_HEIGHT}
                     />
 
                     <TradingViewWidget
@@ -57,7 +60,7 @@ export default function NewsPage() {
                             showSymbolLogo: true,
                             showFloatingTooltip: false,
                             width: "100%",
-                            height: 400,
+                            height: SIDE_WIDGET_HEIGHT,
                             plotLineColorGrowing: "rgba(41, 98, 255, 1)",
                             plotLineColorFalling: "rgba(41, 98, 255, 1)",
                             gridLineColor: "rgba(240, 243, 250, 0)",
@@ -69,7 +72,7 @@ export default function NewsPage() {
                             symbolActiveColor: "rgba(41, 98, 255, 0.12)"
                         }}
                         className="custom-chart"
-                        height={400}
+                        height={SIDE_WIDGET_HEIGHT}
                     />
                 </div>
             </div>
