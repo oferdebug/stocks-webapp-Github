@@ -9,7 +9,6 @@ import {
 import {Loader2, TrendingUp} from "lucide-react";
 import Link from "next/link";
 import {searchStocks} from "@/lib/actions/finnhub.actions";
-import {useEffect} from "react";
 import {useDebounce} from "@/hooks/useDebounce";
 import {StarButton} from "@/components/search/StarButton";
 
@@ -79,7 +78,7 @@ export function GlobalSearchCommand() {
 
     const debouncedSearch = useDebounce(handleSearch, 300);
 
-    useEffect(() => {
+    React.useEffect(() => {
         debouncedSearch();
     }, [searchTerm, debouncedSearch]);
 
