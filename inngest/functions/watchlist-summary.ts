@@ -30,6 +30,24 @@ async function generateWatchlistAiSummary(data: any) {
     }
 }
 
+async function processWatchlistStockData(watchlist: any[]) {
+    const stockData = await Promise.all(watchlist.map(async (item) => {
+        const quote = await getQuote(item.symbol);
+        return {
+            symbol: item.symbol,
+            companyName: item.companyName,
+            price: quote?.c || 0,
+            changePercent: quote?.dp || 0
+        };
+    }));
+
+    const sortedByChange = [...stockData].sort((a, b) => b.changePercent - a.changePercent);
+    const topGainer = sortedByChange[0];
+    const topLoser = sortedByChange[sortedByChange.length - 1];
+
+    return { stockData, topGainer, topLoser };
+}
+
 export const watchlistSummaryEmail = inngest.createFunction(
     {id: 'watchlist-daily-summary'},
     {cron: '0 8 * * *'}, // 8 AM Daily
@@ -46,19 +64,7 @@ export const watchlistSummaryEmail = inngest.createFunction(
                 const watchlist = await Watchlist.find({userId: user.id || user._id.toString()});
                 if (!watchlist || watchlist.length === 0) return;
 
-                const stockData = await Promise.all(watchlist.map(async (item) => {
-                    const quote = await getQuote(item.symbol);
-                    return {
-                        symbol: item.symbol,
-                        companyName: item.companyName,
-                        price: quote?.c || 0,
-                        changePercent: quote?.dp || 0
-                    };
-                }));
-
-                const sortedByChange = [...stockData].sort((a, b) => b.changePercent - a.changePercent);
-                const topGainer = sortedByChange[0];
-                const topLoser = sortedByChange[sortedByChange.length - 1];
+                const { stockData, topGainer, topLoser } = await processWatchlistStockData(watchlist);
 
                 let aiSummary = undefined;
                 if (user.watchlistPreferences?.includeAiSummary) {
@@ -110,19 +116,7 @@ export const watchlistWeeklySummary = inngest.createFunction(
                 const watchlist = await Watchlist.find({userId: user.id || user._id.toString()});
                 if (!watchlist || watchlist.length === 0) return;
 
-                const stockData = await Promise.all(watchlist.map(async (item) => {
-                    const quote = await getQuote(item.symbol);
-                    return {
-                        symbol: item.symbol,
-                        companyName: item.companyName,
-                        price: quote?.c || 0,
-                        changePercent: quote?.dp || 0
-                    };
-                }));
-
-                const sortedByChange = [...stockData].sort((a, b) => b.changePercent - a.changePercent);
-                const topGainer = sortedByChange[0];
-                const topLoser = sortedByChange[sortedByChange.length - 1];
+                const { stockData, topGainer, topLoser } = await processWatchlistStockData(watchlist);
 
                 let aiSummary = undefined;
                 if (user.watchlistPreferences?.includeAiSummary) {
