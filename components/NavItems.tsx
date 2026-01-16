@@ -4,6 +4,7 @@ import {usePathname} from "next/navigation";
 import {NAV_ITEMS} from "@/lib/constants"; // or '@/constants'
 import {cn} from "@/lib/utils";
 import {LayoutDashboard, Search, Star, Newspaper} from "lucide-react";
+import {SearchCommand} from "@/components/SearchCommand";
 
 /* SENIOR NOTE:
    Added 'className' prop to make the component reusable in different contexts
@@ -39,17 +40,42 @@ const NavItems = ({className}: { className?: string }) => {
                 className
             )}>
             {NAV_ITEMS.map(({href, label}) => {
+                const icon = getIcon(label);
+                const active = isActive(href);
+
+                if (label === "Search") {
+                    return (
+                        <li key={href}>
+                            <SearchCommand
+                                renderAs="text"
+                                label={
+                                    <>
+                                        {icon}
+                                        {label}
+                                    </>
+                                }
+                                className={cn(
+                                    "transition-colors flex items-center gap-1.5 cursor-pointer",
+                                    active
+                                        ? "text-green-500"
+                                        : "text-white hover:text-green-500"
+                                )}
+                            />
+                        </li>
+                    );
+                }
+
                 return (
                     <li key={href}>
                         <Link
                             href={href}
                             className={cn(
                                 "transition-colors flex items-center gap-1.5",
-                                isActive(href)
+                                active
                                     ? "text-green-500"
                                     : "text-white hover:text-green-500"
                             )}>
-                            {getIcon(label)}
+                            {icon}
                             {label}
                         </Link>
                     </li>

@@ -19,7 +19,7 @@ import {StarButton} from "@/components/search/StarButton";
 
 interface SearchCommandProps {
     renderAs?: 'button' | 'text'
-    label?: string
+    label?: React.ReactNode
     initialStocks?: StockWithWatchlistStatus[]
     className?: string
 }
