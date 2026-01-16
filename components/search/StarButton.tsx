@@ -33,11 +33,6 @@ export const StarButton = ({symbol, companyName, initialIsWatched}: StarButtonPr
         e.preventDefault();
         e.stopPropagation();
 
-        if (!session) {
-            toast.error("Please sign in to add stocks to your watchlist");
-            return;
-        }
-
         // Optimistic update
         const nextState = !isWatched;
         setIsWatched(nextState);
@@ -46,7 +41,7 @@ export const StarButton = ({symbol, companyName, initialIsWatched}: StarButtonPr
             const res = await toggleWatchlist(symbol, companyName);
             if (!res.success) {
                 setIsWatched(!nextState);
-                toast.error(res.error || "Failed to update watchlist");
+                toast.error(res.error || "Please sign in to manage your watchlist");
             } else {
                 toast.success(nextState ? `Added ${symbol} to watchlist` : `Removed ${symbol} from watchlist`);
             }

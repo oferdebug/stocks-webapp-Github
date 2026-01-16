@@ -6,6 +6,7 @@ import {auth} from "@/lib/better-auth/auth";
 import {headers} from "next/headers";
 import {revalidatePath} from "next/cache";
 import {getQuote, getCompanyProfile} from "./finnhub.actions";
+import {cache} from "react";
 
 /**
  * Add a stock to the user's watchlist.
@@ -82,7 +83,7 @@ export async function removeFromWatchlist(symbol: string, email?: string) {
 /**
  * Get user's watchlist enriched with live Finnhub data.
  */
-export async function getWatchlist() {
+export const getWatchlist = cache(async () => {
     try {
         const session = await auth.api.getSession({headers: await headers()});
         if (!session?.user) return [];
@@ -114,7 +115,7 @@ export async function getWatchlist() {
         console.error("Error in getWatchlist:", error);
         return [];
     }
-}
+});
 
 /**
  * Check if a stock is in the user's watchlist.
@@ -156,7 +157,7 @@ export async function toggleWatchlist(symbol: string, companyName: string) {
 /**
  * Get watchlist summary statistics.
  */
-export async function getWatchlistSummary() {
+export const getWatchlistSummary = cache(async () => {
     try {
         const watchlist = await getWatchlist();
         if (!watchlist || watchlist.length === 0) {
@@ -185,7 +186,7 @@ export async function getWatchlistSummary() {
         console.error("Error in getWatchlistSummary:", error);
         return null;
     }
-}
+});
 
 /**
  * Internal: Retrieve watchlist symbols by email.

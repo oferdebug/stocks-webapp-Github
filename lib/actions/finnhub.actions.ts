@@ -3,6 +3,10 @@
 import {cache} from 'react';
 import {formatArticle, validateArticle} from "@/lib/utils";
 import {POPULAR_STOCK_SYMBOLS} from "@/lib/constants";
+import {auth} from "@/lib/better-auth/auth";
+import {headers} from "next/headers";
+import {connectToDatabase} from "@/database/mongoose";
+import Watchlist from "@/database/models/watchlist.model";
 
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;
@@ -150,15 +154,27 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
         }
 
         // Map results to StockWithWatchlistStatus
+        const session = await auth.api.getSession({headers: await headers()});
+        let watchlistSymbols: Set<string> = new Set();
+
+        if (session?.user) {
+            await connectToDatabase();
+            const items = await Watchlist.find({userId: session.user.id}, {symbol: 1});
+            watchlistSymbols = new Set(items.map(i => i.symbol.toUpperCase()));
+        }
+
         const mappedResults: StockWithWatchlistStatus[] = results
             .slice(0, 15) // Limit to 15 items
-            .map((result) => ({
-                symbol: result.symbol.toUpperCase(),
-                name: result.description,
-                exchange: result.exchange || 'US',
-                type: result.type || 'Stock',
-                isInWatchlist: false,
-            }));
+            .map((result) => {
+                const symbol = result.symbol.toUpperCase();
+                return {
+                    symbol,
+                    name: result.description,
+                    exchange: result.exchange || 'US',
+                    type: result.type || 'Stock',
+                    isInWatchlist: watchlistSymbols.has(symbol),
+                };
+            });
 
         return mappedResults;
     } catch (error) {

@@ -24,28 +24,23 @@ export const WatchlistButton = ({
     const {data: session} = authClient.useSession();
 
     const handleToggleWatchlist = async () => {
-        if (!session?.user?.email) {
-            toast.error("Please sign in to manage your watchlist");
-            return;
-        }
-
         setLoading(true);
         try {
             if (isInWatchlist) {
-                const res = await removeFromWatchlist(symbol, session.user.email);
+                const res = await removeFromWatchlist(symbol);
                 if (res.success) {
                     setIsInWatchlist(false);
                     toast.success(`${symbol} removed from watchlist`);
                 } else {
-                    toast.error(res.error || "Failed to remove from watchlist");
+                    toast.error(res.error || "Please sign in to manage your watchlist");
                 }
             } else {
-                const res = await addToWatchlist(symbol, company || symbol, session.user.email);
+                const res = await addToWatchlist(symbol, company || symbol);
                 if (res.success) {
                     setIsInWatchlist(true);
                     toast.success(`${symbol} added to watchlist`);
                 } else {
-                    toast.error(res.error || "Failed to add to watchlist");
+                    toast.error(res.error || "Please sign in to manage your watchlist");
                 }
             }
         } catch (error) {
