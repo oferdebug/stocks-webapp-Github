@@ -3,18 +3,32 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {NAV_ITEMS} from "@/lib/constants"; // or '@/constants'
 import {cn} from "@/lib/utils";
-import {SearchCommand} from "@/components/SearchCommand";
-import {Star} from "lucide-react";
+import {LayoutDashboard, Search, Star, Newspaper} from "lucide-react";
 
 /* SENIOR NOTE:
    Added 'className' prop to make the component reusable in different contexts
    (e.g., Header horizontal menu vs. a Dropdown vertical menu).
 */
-const NavItems = ({initialStocks, className}: { initialStocks: StockWithWatchlistStatus[]; className?: string }) => {
+const NavItems = ({className}: { className?: string }) => {
     const pathname = usePathname();
 
     const isActive = (path: string) => {
         return pathname === path;
+    };
+
+    const getIcon = (label: string) => {
+        switch (label) {
+            case "Dashboard":
+                return <LayoutDashboard className="h-4 w-4"/>;
+            case "Search":
+                return <Search className="h-4 w-4"/>;
+            case "Watchlist":
+                return <Star className="h-4 w-4"/>;
+            case "News":
+                return <Newspaper className="h-4 w-4"/>;
+            default:
+                return null;
+        }
     };
 
     return (
@@ -25,16 +39,6 @@ const NavItems = ({initialStocks, className}: { initialStocks: StockWithWatchlis
                 className
             )}>
             {NAV_ITEMS.map(({href, label}) => {
-                if (label === "Search")
-                    return (
-                        <li key="search-trigger">
-                            <SearchCommand
-                                renderAs={"text"}
-                                label={"Search"}
-                                initialStocks={initialStocks}
-                            />
-                        </li>
-                    );
                 return (
                     <li key={href}>
                         <Link
@@ -45,7 +49,7 @@ const NavItems = ({initialStocks, className}: { initialStocks: StockWithWatchlis
                                     ? "text-green-500"
                                     : "text-white hover:text-green-500"
                             )}>
-                            {label === "Watchlist" && <Star className="h-4 w-4"/>}
+                            {getIcon(label)}
                             {label}
                         </Link>
                     </li>

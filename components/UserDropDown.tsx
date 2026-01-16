@@ -25,7 +25,7 @@ interface UserDropDownProps {
     } | null;
 }
 
-const UserDropDown = ({user, initialStocks}: { user: User, initialStocks: StockWithWatchlistStatus[] }) => {
+const UserDropDown = ({user}: { user: User }) => {
     const router = useRouter();
 
     /* SENIOR NOTE: Calculation inside component scope */
@@ -97,7 +97,7 @@ const UserDropDown = ({user, initialStocks}: { user: User, initialStocks: StockW
                     'sm:gap-2' reduces the gap for the tight dropdown space.
                 */}
                 <div className="px-2 pb-2">
-                    <NavItems className="flex-col sm:flex-col items-start sm:gap-1 p-0" initialStocks={initialStocks}/>
+                    <NavItems className="flex-col sm:flex-col items-start sm:gap-1 p-0"/>
                 </div>
 
             </DropdownMenuContent>

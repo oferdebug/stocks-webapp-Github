@@ -3,10 +3,8 @@ import Link from 'next/link';
 
 import NavItems from '@/components/NavItems';
 import UserDropDown from '@/components/UserDropDown';
-import {searchStocks} from "@/lib/actions/finnhub.actions";
 
 const Header = async ({user}: { user: User }) => {
-    const initialStocks = await searchStocks('');
     return (
         <header className="sticky top-0 z-50 w-full bg-black border-b border-gray-800">
             {/* Three-column grid for absolute centering of the middle item */}
@@ -28,12 +26,12 @@ const Header = async ({user}: { user: User }) => {
 
                 {/* Center Section: Navigation Links */}
                 <nav className="hidden sm:flex justify-center">
-                    <NavItems initialStocks={initialStocks}/>
+                    <NavItems/>
                 </nav>
 
                 {/* Right Section: User Icon */}
                 <div className="flex justify-end">
-                    <UserDropDown user={user} initialStocks={initialStocks}/>
+                    <UserDropDown user={user}/>
                 </div>
 
             </div>
